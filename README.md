@@ -18,7 +18,7 @@ However, Producers Direct needs analytical expertise to extract meaningful patte
 # Submitting your work 
 Every bit of information you contribute is a chance for our partner, Producers Direct, to better understand the challenges and opportunities smallhold farmers face in sub-Saharan Africa and Latin America through a data-driven lens.  
 
-We want to see it all! Everything will help–not just right answers, but wrong answers and works in progress too.
+***We want to see it all! Everything will help–not just right answers, but wrong answers and works in progress too.***
 
 ## Use of Generative AI during the Event
 
