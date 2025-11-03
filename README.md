@@ -1,7 +1,7 @@
 # datakit-smallholder-farmers-fall-2025
 
-# What's a DataKit?
-A DataKit™ is a work-ready set of data, software, and innovation questions, curated by DataKind, in a domain of social good. As you engage with a DataKit, you will apply your skills for social impact while deepening your understanding of problems common in the space. All learnings, ideas, and insights resulting from this DataKit will be aggregated and used by DataKind to expand our impact in the financial inclusion and economic opportunity sector. Specifically, we aim to leverage your insights and prototype solutions to expand on our product offerings, supporting stakeholders to expand their reach and impact. Learnings will be shared throughout the DataKit and beyond. 
+## What's a DataKit?
+* *A DataKit™ is a work-ready set of data, software, and innovation questions, curated by DataKind, in a domain of social good. As you engage with a DataKit, you will apply your skills for social impact while deepening your understanding of problems common in the space. All learnings, ideas, and insights resulting from this DataKit will be aggregated and used by DataKind to expand our impact in the financial inclusion and economic opportunity sector. Specifically, we aim to leverage your insights and prototype solutions to expand on our product offerings, supporting stakeholders to expand their reach and impact. Learnings will be shared throughout the DataKit and beyond.* * 
 
 # Problem to tackle
 Producers Direct acquired all data, technologies, and data science initiatives from WeFarm when the latter went bankrupt in late 2022. WeFarm operated for approximately 7 years as an SMS platform, enabling smallholder farmers in East Africa to share agricultural knowledge and receive peer-to-peer advice. During this time, WeFarm accumulated a substantial dataset consisting of:
@@ -23,6 +23,9 @@ We want to see it all! Everything will help–not just right answers, but wrong 
 ## Use of Generative AI during the Event
 
 Generative AI tools (such as ChatGPT, GitHub Copilot, or similar) may be used throughout the DataKit event to assist with tasks such as code generation, data visualization, or documentation. We encourage participants to use these tools strategically and responsibly as partners in exploration and analysis, not as replacements for critical thinking.. The goal is to use GenAI strategically to enhance creativity, collaboration, and efficiency, while ensuring that all final analyses and insights reflect human judgment, transparency and ethical data practices. 
+
+# The Project Brief 
+The project brief to guide you for this DataKit event can be found [here](https://docs.google.com/document/d/1jUpzjTFr_Q-vOzShY4ejU8ydxRDlXoy4CyyHILxtyi8/edit?tab=t.0#heading=h.os2f23w18nrx). 
 
 # How to contribute: Challenges
 - [Prep Challenge: Bridging Languages — Translating Farmer Conversations](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Prep%20Challenge-%20Translation>)
