@@ -25,10 +25,10 @@ We want to see it all! Everything will help–not just right answers, but wrong 
 Generative AI tools (such as ChatGPT, GitHub Copilot, or similar) may be used throughout the DataKit event to assist with tasks such as code generation, data visualization, or documentation. We encourage participants to use these tools strategically and responsibly as partners in exploration and analysis, not as replacements for critical thinking.. The goal is to use GenAI strategically to enhance creativity, collaboration, and efficiency, while ensuring that all final analyses and insights reflect human judgment, transparency and ethical data practices. 
 
 # How to contribute: Challenges
-- [Prep Challenge: Bridging Languages — Translating Farmer Conversations] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Prep%20Challenge-%20Translation>) 
-- [Challenge 1: Identifying patterns in weather and agriculture] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%201%20_Weather%20Patterns>)
-- [Challenge 2: Seasonality] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%202_Seasonality>)
-- [Challenge 3: Identifying Community Leaders] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%203_Community%20Leaders>) 
-- [Challenge 4: Crop-Specific vs. Crop-Independent Questions] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%204_%20Crop%20Questions>)
-- [Challenge 5: Beyond Farming — Financial Inclusion and Livelihood] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%205_%20Financial%20Inclusion>)
+- [Prep Challenge: Bridging Languages — Translating Farmer Conversations] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Prep%20Challenge-%20Translation>). 
+- [Challenge 1: Identifying patterns in weather and agriculture] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%201%20_Weather%20Patterns>).
+- [Challenge 2: Seasonality] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%202_Seasonality>).
+- [Challenge 3: Identifying Community Leaders] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%203_Community%20Leaders>). 
+- [Challenge 4: Crop-Specific vs. Crop-Independent Questions] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%204_%20Crop%20Questions>).
+- [Challenge 5: Beyond Farming — Financial Inclusion and Livelihood] (<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%205_%20Financial%20Inclusion>).
 
