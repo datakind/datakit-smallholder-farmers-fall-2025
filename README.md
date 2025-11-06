@@ -27,11 +27,11 @@ Generative AI tools (such as ChatGPT, GitHub Copilot, or similar) may be used th
 ## GitHub Guidelines
 To contribute to a challenge, please add your work to the appropriate challenge sub-folder in the GitHub repository.
 1. Fork this repository to your own GitHub account.
-2. Add your files locally under ***challenge_X_title/<your-name-or-analysis-title>/***
+2. Add your files locally under `challenge_X_title/<your-name-or-analysis-title>/`
 3. Include your analysis, code, and results.
 4. Commit and push your changes to your fork.
 5. Open a Pull Request back to this repository.
-Be sure to include a short ***README.md*** in your submission folder describing your approach, key results, and any dependencies.
+Be sure to include a short `README.md` in your submission folder describing your approach, key results, and any dependencies.
 
 # The Project Brief 
 The project brief to guide you for this DataKit event can be found [here](https://docs.google.com/document/d/1jKTmb8R5GlM9uqQkB5fXd37o2bdX17JKB36mK-NqWFE/edit?tab=t.0). 
