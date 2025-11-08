@@ -1,33 +1,3 @@
-{
- "cells": [
-  {
-   "cell_type": "markdown",
-   "id": "f58ffc72-0d6b-40da-9d4f-00bc4d83f930",
-   "metadata": {},
-   "source": [
-    "Readme"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.13.7"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+testing
+<img width="649" height="868" alt="image" src="https://github.com/user-attachments/assets/ffe4b600-c12a-43ed-82e6-20769d665942" />
+
