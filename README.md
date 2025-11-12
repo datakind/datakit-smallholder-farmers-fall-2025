@@ -24,8 +24,22 @@ Every bit of information you contribute is a chance for our partner, Producers D
 
 Generative AI tools (such as ChatGPT, GitHub Copilot, or similar) may be used throughout the DataKit event to assist with tasks such as code generation, data visualization, or documentation. We encourage participants to use these tools strategically and responsibly as partners in exploration and analysis, not as replacements for critical thinking.. The goal is to use GenAI strategically to enhance creativity, collaboration, and efficiency, while ensuring that all final analyses and insights reflect human judgment, transparency and ethical data practices. 
 
+## GitHub Guidelines
+To contribute to a challenge, please add your work to the appropriate challenge sub-folder in the GitHub repository.
+1. Fork this repository to your own GitHub account.
+2. Add your files locally under `challenge_X_title/<your-name-or-analysis-title>/`
+3. Include your analysis, code, and results.
+4. Commit and push your changes to your fork.
+5. Open a Pull Request back to this repository.
+Be sure to include a short `README.md` in your submission folder describing your approach, key results, and any dependencies.
+
 # The Project Brief 
-The project brief to guide you for this DataKit event can be found [here](https://docs.google.com/document/d/1jUpzjTFr_Q-vOzShY4ejU8ydxRDlXoy4CyyHILxtyi8/edit?tab=t.0#heading=h.os2f23w18nrx). 
+The project brief to guide you for this DataKit event can be found [here](https://docs.google.com/document/d/1jKTmb8R5GlM9uqQkB5fXd37o2bdX17JKB36mK-NqWFE/edit?tab=t.0). 
+
+***N.B.*** Please do not upload the challenge dataset to public dataset repositories such as Kaggle or share the data via public Google Drive or Dropbox links. 
+
+_While we recognize this may facilitate collaboration with other volunteers, our partners at Producers Direct are looking to develop the legal, governance, and technical infrastructure for their global cooperative. This will focus on allowing farmers to retain control of their data, but allow third parties access to the data in specific circumstances._
+
 
 # How to contribute: Challenges
 - [Prep Challenge: Bridging Languages — Translating Farmer Conversations](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Prep%20Challenge-%20Translation>)
