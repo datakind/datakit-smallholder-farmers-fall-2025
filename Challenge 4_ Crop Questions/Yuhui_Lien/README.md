@@ -1,5 +1,5 @@
-#Yu-hui Lien
-#Submission - 1
+# Yu-hui Lien
+# Submission - 1
 
 ```
 # Project: Lexical Classification of Farmer Questions (Traditional Method)
@@ -91,7 +91,7 @@ The traditional Lexical Classification method provides a fast and robust initial
 ```
 
 
-#Submission - 2
+# Submission - 2
 
 # Project: Guided Topic Modeling for Smallholder Farmer Questions (Challenge 4)
  
