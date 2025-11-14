@@ -1,8 +1,8 @@
-# Yu-hui Lien
-# Submission - 1
+## Yu-hui Lien
+## Submission - 1
 
 ```
-# Challenge-4-crop-questions-traditional method.ipynb
+## Challenge-4-crop-questions-traditional method.ipynb
 
 ## 1. Executive Summary
 
@@ -18,7 +18,6 @@ This project utilizes a **Prioritized Lexical Classification** approach to categ
 
 * Preliminary results show a clear imbalance, with 66% being Specific Questions and roughly 34% being General Questions.
 
-* The line chart shows that while Specific Questions generally dominate, I observed a distinct convergence between August 2021 and September 2021.
 
 ## 2. Data
 
@@ -63,19 +62,28 @@ Questions were classified based on a strict priority order. The question is assi
 
 ## 4. Results and Visualization
 
-The model successfully assigned each question to one of the predefined categories.
+![Overall Topic Proportion](https://raw.githubusercontent.com/yhlien1221/datakit-smallholder-farmers-fall-2025/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/topic_proportion_overall.png)
+
+![Topic proportion trend](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/topic_proportion_trend.png)
+
+![Distribution of general question into subtopics](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/general_topic_breakdown_final_corrected.png)
+
 
 ### A. Topic Distribution (Overall)
 
-A bar chart showing the total count and proportion of questions falling into each of the predefined Lexical Categories (e.g., Pest & Disease, Market & Finance).
+* Preliminary results show a clear imbalance, with 66% being Specific Questions and roughly 34% being General Questions.
 
-### B. Topic Distribution by Time (Seasonal/Monthly)
+### B. Topic Distribution by Time (Monthly)
 
-Analysis of category distribution over time (monthly or seasonally) revealed shifts in farmer focus coinciding with agricultural cycles (e.g., higher 'Technique' questions during planting season).
+The line chart shows that while Specific Questions generally dominate, I observed a distinct convergence between August 2021 and September 2021.
+
+### C. Distribution of general question into subtopics
+
+This bar chart reveals that the majority of inquiries fall into just two areas: Unclassified/Other/Vague (34.8%) and Farming Technique (28.7%). The remaining topics, such as "Concept & Definition" (15.5%) and "Soil & Water Management" (6.9%), constitute smaller proportions of the total general questions
 
 ## 5. Conclusion and Next Steps
 
-The traditional Lexical Classification method provides a fast and robust initial categorization layer. Its high interpretability makes it ideal for immediate business reporting and dashboard visualization.
+The traditional Lexical Classification method provides a fast and robust initial categorization layer. Its high interpretability makes it ideal for immediate business reporting and dashboard visualization; **however, maintaining and updating the comprehensive list of keywords and phrases necessary for this method can be challenging.**
 
 **The final output contains the following essential columns:**
 
@@ -85,12 +93,8 @@ The traditional Lexical Classification method provides a fast and robust initial
 
 **Next Steps:**
 
-1. **Model Comparison:** Compare the results of this Lexical Classification against the Transformer-based BERTopic model (if run) to assess accuracy and coverage improvements.
+1. **Enhance Subtopic Classification with BERTopic**: Apply the Transformer-based BERTopic model to refine the classification of general questions into subtopics, focusing particularly on improving the accuracy and coverage of questions currently labeled as 'Unclassified' by the lexical method.
 
-2. **Category Refinement:** Update keyword lists based on analysis of the 'Unclassified' category.
-
-3. **Dashboard Integration:** Integrate the `broad_topic` column into a time-series dashboard for real-time monitoring.
-```
 
 
 # Submission - 2
