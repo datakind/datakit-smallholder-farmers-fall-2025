@@ -72,7 +72,6 @@ The seasonal question volume validates two major crisis periods that require sep
 ### Question Volume by Month: Seasonal Validation
 
 *Interpretation:* This visualization aligns question volume spikes with the East African agricultural calendar, confirming that farmers seek help during all critical, high-risk periods (planting, harvest, and secondary planting).
-![view](Challenge 1 _Weather Patterns/Ruben Vermaak/Question Volum vs. Average Temperature by topic.png)
 
 ### Question Volume vs. Avg. Max Temperature ($tasmax$)
 *Interpretation:* Shows how questions about key topics like **Maize, Cattle, and Cereal** cluster in the months with the highest average temperatures, confirming their universal vulnerability to heat stress across all countries.
