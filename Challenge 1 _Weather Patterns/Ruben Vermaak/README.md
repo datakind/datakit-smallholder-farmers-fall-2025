@@ -44,7 +44,7 @@ This analysis investigates the relationship between smallholder farmer questions
 
 ## Key Findings & Strategic Implications
 
-### Finding 1: 🌍 Climate Sensitivity is Localized and Drives Opposite Crises
+### Finding 1: Climate Sensitivity is Localized and Drives Opposite Crises
 
 | Country | Primary Climate Driver | R-value | Strategic Focus |
 | :--- | :--- | :--- | :--- |
@@ -54,7 +54,7 @@ This analysis investigates the relationship between smallholder farmer questions
 
 **Implication:** Content must be **hyper-localized** based on the dominant stressor. A general drought alert is insufficient; TZA needs heat/drought solutions, while KEN/UGA need fungal disease prevention.
 
-### Finding 2: 🗓️ Two Distinct Crisis Peaks Define the Farmer Support Calendar
+### Finding 2: Two Distinct Crisis Peaks Define the Farmer Support Calendar
 
 The seasonal question volume validates two major crisis periods that require separate intervention strategies:
 
@@ -72,9 +72,11 @@ The seasonal question volume validates two major crisis periods that require sep
 ### Question Volume by Month: Seasonal Validation
 
 *Interpretation:* This visualization aligns question volume spikes with the East African agricultural calendar, confirming that farmers seek help during all critical, high-risk periods (planting, harvest, and secondary planting).
+![view](Challenge 1 _Weather Patterns/Ruben Vermaak/Question Volum vs. Average Temperature by topic.png)
 
 ### Question Volume vs. Avg. Max Temperature ($tasmax$)
 *Interpretation:* Shows how questions about key topics like **Maize, Cattle, and Cereal** cluster in the months with the highest average temperatures, confirming their universal vulnerability to heat stress across all countries.
+
 
 ---
 
