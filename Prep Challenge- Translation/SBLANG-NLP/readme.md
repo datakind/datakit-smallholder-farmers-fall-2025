@@ -293,7 +293,7 @@ write.csv(dtm[[6]]$Terms,
 ```
 
 # Preliminary Results
-Data analysis shows the below top 20 out of 67 terms, including English translation, source cited, parts-of-speech, singular or plural, and rank. The full list of terms is ![here](/top_nyn_terms.xlsx).
+Data analysis shows the below top 20 out of 67 terms, including English translation, source cited, parts-of-speech, singular or plural, and rank.
 
  | Runyankole | English | Citation | Part-of-speech | Singular or Plural | Top rank
 25 | kandi | and, again, moreover | manual | conjunction |  | 1
