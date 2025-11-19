@@ -1,0 +1,10 @@
+CHALLENGE 3: COMMUNITY LEADERS - SUMMARY
+============================================================
+
+total_responders: 87078
+total_responses: 500000
+top_50_response_share: 5.2028
+avg_response_length: 60.1583078052703
+avg_topics_per_leader: 30.7
+avg_farmers_helped: 306.58
+repeat_askers_5plus: 23824
