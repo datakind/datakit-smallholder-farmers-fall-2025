@@ -202,16 +202,19 @@ Metrics were aggregated using `df.groupby('question_topic').agg()`. The analysis
 The following reports quantify the relationship between farmer necessity and platform content flow.
 
 ### Report A: Demand Volume (Question Repetitiveness)
+![report_a_repetitiveness_seaborn](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/report_a_repetitiveness_seaborn.png)
 **Figure 1:** Total Demand Volume by Topic.
 [IMAGE PLACEHOLDER: report\_a\_repetitiveness\_mpl.png - Demand Volume (Question Count)]
 * **Takeaway:** The top 4 topics ($\text{General\_Topic}, \text{cattle}, \text{maize}, \text{chicken}$) represent the highest consumption of system capacity.
 
 ### Report B: Demand Complexity Ranking
+![report_b_demand_specificity_seaborn](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/report_b_demand_specificity_seaborn.png)
 **Figure 2:** Ranking of Topics by Average Farmer Question Complexity.
 [IMAGE PLACEHOLDER: report\_b\_demand\_specificity\_mpl.png - Question Complexity Ranking]
 * **Takeaway:** Farmer effort is highest for niche crops ($\text{peach}, \text{pear}$), indicating these specialized subjects require maximum user input for proper context.
 
 ### Report C: Knowledge Supply Detail Ranking
+![report_c_supply_detail_seaborn](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/report_c_supply_detail_seaborn.png)
 **Figure 3:** Ranking of Topics by Average Answer Detail (Supply).
 [IMAGE PLACEHOLDER: report\_c\_supply\_detail\_mpl.png - Knowledge Supply Detail Ranking]
 * **Takeaway:** The system's resource allocation for detail is highest for topics driven by **knowledge scarcity** ($\text{rye}, \text{pigeon-pea}$).
