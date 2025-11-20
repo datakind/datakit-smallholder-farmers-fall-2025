@@ -174,7 +174,7 @@ Optimize Clustering Parameters: Refine BERTopic hyperparameters (e.g., min_topic
 
 #### 2. Demand Patterns (Farmer Questioning Behavior)
 
-* **Dominant Demand (Repetitiveness):** $\text{General\_Topic}$ (Rank 1), $\text{cattle}$ (Rank 2), and $\text{maize}$ (Rank 3) account for the largest volume of questions (Report A). This clearly identifies the most common and widespread agricultural and livestock challenges faced by the community.
+* **Dominant Demand (Repetitiveness):** **General Topic** (Rank 1), **cattle** (Rank 2), and **maize** (Rank 3) account for the largest volume of questions (Report A). This clearly identifies the most common and widespread agricultural and livestock challenges faced by the community.
 * **Specialized Questioning Behavior (Specificity):** Farmers asking about niche crops like **peach** (Rank 1), **pear** (Rank 2), and $\text{setaria}$ (Rank 3) formulate the most complex and detailed questions (Report B). This behavior suggests that **askers must provide extensive context** to their peers in these niche areas, where established community knowledge may be sparse, to elicit a helpful response.
 
 ---
@@ -240,6 +240,4 @@ The following reports quantify the relationship between farmer necessity and pla
 
 ### Next Steps:
 
-1.  **Mismatch Intervention:** Implement a content rule that automatically flags any **bird** or **poultry** answer that falls below the system's overall average response length for manual review before delivery.
-2.  **Longitudinal Study:** Track the `Question_Count` over time for high-risk topics like `bird` to see if the demand volume changes following the content intervention.
-3.  **User Feedback Integration:** Integrate a simple "Was this answer useful?" feedback mechanism to directly measure the farmer's **response**, allowing us to validate the quantitative Mismatch Model against actual satisfaction data.
+1. **Knowledge Quality Assessment (BERTopic)**: Implement BERTopic to analyze community response content, shifting the focus from mere answer length to knowledge focus and quality to precisely identify true information gaps.
