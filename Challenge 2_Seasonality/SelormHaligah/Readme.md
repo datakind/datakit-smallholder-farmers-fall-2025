@@ -53,11 +53,7 @@ In testing for association between the questions being asked and the associated 
 
 There were a total of 7.12 million questions asked in the English dataset for Kenya out of which 1.64 million were unique. After matching, the seasons identified were planting, growing and harvesting, with some farmers asking different combinations of questions. Some questions were general and did not relate to the farming season. Such question revolved around animal farming or other agricultural issues. General questions were the most questions asked in the dataset with a total of 5.26 million questions. Planting questions were the second most asked questions in the dataset, representing 1.58 million and growing questions representing 218 thousand questions. Harvesting questions accounted for 13 thousand questions. The remaining questions were a combination of planting and growing, planting and harvesting, harvesting and growing or planting, harvesting and growing questions. Proportionately, General questions accounted for 73.9% of total questions asked, planting and growing accounted for 25.9% and harvesting 0.2%. Averagely, April recorded the highest questions, with general questions proportionately being the most with 71.9%, while October recorded the least questions being recorded with general questions also proportionately being the most with 73.3%.
 
-## Visualizations
-![Image 1](Image%201.png)
 
-
-![Visualization 2] (Challenge 2_Seasonality/SelormHaligah/image 2.png)
 -----
 ### Methodological Limitations
 - Assumptions made
