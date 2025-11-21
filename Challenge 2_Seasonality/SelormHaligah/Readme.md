@@ -88,7 +88,7 @@ Run Kenya Data Analysis.pbix
 ### Dependencies
 - pandas 2.3.1
 - numpy <= 1.26.4
--NLTK < = 3.9.2
+- NLTK < = 3.9.2
 
 **Collaboration Welcome**: 
 - Open to feedback and suggestions
