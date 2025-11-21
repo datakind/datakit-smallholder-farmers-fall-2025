@@ -1,0 +1,28 @@
+🌾 Kenya Climate–WeFarm Analysis
+DataKind DataKit – Challenge 1: Climate & Agriculture
+
+This project explores how rainfall and temperature patterns in Kenya influence the types of agricultural questions farmers ask on the WeFarm platform.
+The analysis aims to help Producers Direct understand weather-driven farming behaviors and improve support for smallholder farmers.
+
+📊 Key Findings
+🌧️ Pest & planting questions spike following heavy rainfall.
+☀️ Irrigation & soil questions increase during hot, dry months.
+🧠 Using LDA Topic Modeling, we detected clear seasonal shifts in conversation topics.
+🧰 Methods & Tools
+Step	Tool/Technique
+Data Processing	Python, Pandas
+Visualization	Matplotlib, Seaborn
+NLP & Topic Modeling	LDA (Gensim)
+Climate Data	World Bank Climate Portal
+Farmer Data	WeFarm dataset (Producers Direct)
+📈 Outputs
+📘 Kenya_Climate_WeFarm_KaramAlojaili.ipynb
+🖼️ Climate-question correlation plots
+📅 Monthly and seasonal trends visualizations
+🧑‍🔬 Author
+Karam Alojaili
+DataKind Volunteer | Bioinformatics & Climate Analytics
+🌐 GitHub
+✉️ karamalojaili1@gmail.com
+
+“Data for social good isn’t just analytics — it’s impact.” 🌍
