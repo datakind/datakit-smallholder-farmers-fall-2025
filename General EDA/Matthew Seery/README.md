@@ -17,9 +17,12 @@ To fill in the missing values for question_topic that account for less than 20% 
 ## Results
 On the test dataset the model was 82.7% accurate
 
-## Further Work
-I am aware that within the missing values there are questions that do not appear to relate to the existing 148 labels in 'question_topic'. However, there are still questions in this dataset that relate to the given topics,
+## Suggestions For Further Work
+Amongst the values within 'question_topic' are those that are very generic. These include 'plant', 'animal', 'poultry', 'bird', 'grass', 'crop', 'vegetable', and 'tree'.
 
-I want to look further into how well the model is predicting the missing values.
+Given the poor predicition rate for 'plant', despite the many samples in the dataset, it could be that a more specific label could be used from the 148 different options. In other words, in some cases, the generic term was entered instead of something more specific.
 
+Updating the values in 'question_topic' could help improve the accuracy of the model resulting in better predictions for the missing values.
+
+However, some caution will need to be made for wnat words are chosen as words like pigeon can refer to a plant or a bird.
 
