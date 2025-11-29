@@ -1,12 +1,13 @@
 # Beyond Farming - Financial Inclusion and Livelihood Analysis
 
 ## Overview
-This project explores how smallholder farmers discuss financial topics such as market prices, credit access, savings, and other non-farming livelihood concerns, to better understand their economic realities, challenges and opportunities for inclusion through financial tools, information to manage risk and investments in productivity. This analysis would inform Producer Direct's support for farmer entrepreneurship, market access, and rural financial systems.
+This project explores how smallholder farmers discuss financial topics such as market prices, credit access, savings, and other non-farming livelihood concerns to better understand their economic realities, challenges, and opportunities for inclusion through financial tools, risk management information, and investments in productivity. This analysis would inform Producer Direct's support for farmer entrepreneurship, market access, and rural financial systems.
 
 ## Research Questions
 - Question 1: What share of farmer questions relate to financial topics?
-- Question 2: How do financial questions vary across seasons and regions?
-- Question 3: How do farmers express financial challenges and opportunities?
+- Question 2: How do financial questions vary across seasons?
+- Question 3: How do financial questions vary across regions?
+- Question 4: How do farmers express financial challenges and opportunities?
 
 ## Key Findings
 
@@ -29,7 +30,7 @@ Producers Direct should:
 3. Develop automated price-insight messages, e.g., price drops, best-selling locations, or price anomalies.
 4. Include price trend visualizations or weekly summaries to reduce repeated questions.
 
-### Key Finding 2: Financial questions rise during major farming cash-flow cycles—before planting (April) and during harvest/selling periods (July–Aug, Nov)
+### Key Finding 2: Financial questions rise during major farming cash-flow cycles—before/during planting (April) and during harvest/selling periods (July–Aug, Nov)
 ![Key Finding 2](https://github.com/PreciousEnahoro/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%205_%20Financial%20Inclusion/Precious%20Enahoro/key-finding-vizzes/Seasonal%20Trends%20in%20Farmer%20Financial%20Questions.png)
 
 Farmers' financial questions follow strong seasonal patterns:
@@ -39,26 +40,23 @@ Farmers' financial questions follow strong seasonal patterns:
 
 **Implications for Producers Direct:**
 
-1. Time financial products to farming cycles:
+1. Seasonal peaks mean farmer needs are predictable, enabling the company to time educational content, nudges, or onboarding sequences around planting and harvest cycles. Hence, time financial products to farming cycles:
    - Jan–Apr: input loans + cost-saving tips
    - Jul–Aug: market-price tools + selling support
    - Nov: repayment flexibility + savings nudges
 
 2. Prioritize price-discovery features during harvest, since this dominates financial questions.
 
-### Finding 3: [Title]
-Description of the finding, supported by data and visualizations.
+### Key Finding 3: Ugandan farmers prioritize price discovery, while Kenyan farmers additionally seek credit and startup capital before planting seasons.
+Ugandan farmers ask significantly more financial questions than Kenyan farmers, a difference confirmed by a chi-square test (p < 0.001).
+
+Market price questions dominate financial needs in both countries, but **Uganda is far more reliant on price discovery**, with prices accounting for nearly 60% of all financial queries. **Kenyan farmers display a more diversified financial profile**, combining price discovery with strong demand for credit, startup capital, and investment evaluation. In general, seasonal patterns also mirror agricultural cycles.
 
 **Implications for Producers Direct:**
-- How this finding can be used
-- What actions it suggests
+1. Country patterns differ significantly, so localized strategies will be more effective than a uniform financial product.
+2. Since price discovery remains essential in both countries, any price-related improvements could generate cross-market impact and create immediate, large-scale value.
+3. Kenya’s pronounced demand for loans and startup capital suggests an opportunity for partnerships with lenders or lightweight credit-readiness tools.
 
-
-## Recommendations
-### For Producers Direct
-1. **Action 1**: Specific recommendation for the organization
-2. **Action 2**: How to use these insights
-3. **Action 3**: What additional data or resources would help
 
 ## Next Steps 
 ### For Further Analysis
