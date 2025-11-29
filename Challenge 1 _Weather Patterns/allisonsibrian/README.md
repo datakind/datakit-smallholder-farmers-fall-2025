@@ -1,7 +1,7 @@
 # Allison Sibrian - Challenge 1 Analysis
 
 ## Overview
-This project investigates the hypothesis that weather events drive specific spikes in farmer questions on the Producers Direct platform. By integrating monthly ERA5 climate data with 5 years of farmer question history across Kenya, Uganda, and Tanzania, this analysis focused on predicting topic inquiry volume.
+ This project analyzes whether weather patterns can predict the types of questions farmers ask. By translating farmer SMS messages from local languages (Swahili, Luganda, and Runyankole) and combining them with ERA5 weather data, I built a model to predict spikes in farmer inquiries.
 
 Note: Due to the massive dataset size (21M rows), this analysis was conducted on a stratified 0.5% sample.
 
@@ -13,14 +13,14 @@ Note: Due to the massive dataset size (21M rows), this analysis was conducted on
 ## Methodology
 
 ### Data Sources
-- Producers Direct Dataset: Obtained the de-duplicated farmer questions split by language from the raw data set.
-- Global Historical Climatology Network daily (GHCNd): Pre-processed in Google Colab data to obtain Kenya, Tanzania, and Uganda stations data for EDA.
+- Producers Direct Dataset: Obtained de-duplicated farmer questions split by language (English, Swahili, Luganda, Runyankole).
 - ERA5 Climate Reanalysis Data: Monthly aggregates for Total Precipitation (prcp), Maximum Temperature (tasmax), and Minimum Temperature (tasmin) for Kenya, Uganda, and Tanzania.
+- Global Historical Climatology Network daily (GHCNd): Ground station data (GHCNd) was explored during the initial phase but excluded from the final analysis. EDA revealed that weather stations for the countries would stop recording data. To ensure consistent and reliable data I opted to use ERA5 data in my analysis.
 
 ### Approach
 1. **Step 1**: Data processing, loading, and initial exploration
-2. **Step 2**: Translation & Cleaning 
-3. **Step 3**: Topic Categorization
+2. **Step 2**: Stratified Sampling and Translation 
+3. **Step 3**: Cleaning and Topic Categorization
 4. **Step 4**: Aggregation & Feature Engineering
 5. **Step 5**: Visualizations and Predictive Modeling
 
@@ -36,51 +36,60 @@ Note: Due to the massive dataset size (21M rows), this analysis was conducted on
 
 ## Key Findings
 
-### Heat (tasmax) and Seasonality Outperform Rainfall as the Primary Drivers of 'Pest & Disease' Questions
-Feature Importance analysis consistently identified Maximum Temperature (tasmax) and Month (month_num) as the strongest predictors of pest question volume, significantly outperforming rainfall and rainfall anomalies.
+### Lagged Rainfall (1 Month) is One of the Leading Predictors for 'Pest & Disease' Questions 
+The model identified 1-Month Lagged Rainfall as significantly more predictive than current rainfall. As current rain triggers vegetation growth, farmer's tend to notice pests afterwards.
 
-Biological Insight: While rainfall creates the potential for pests, higher temperatures tend to accelerate insect breeding cycles, increasing the instances of pest presence.
+**Implications for Producers Direct:**
+- To create a pest alert system following this analysis, it would be best to send alerts 3-4 weeks after heavy rainfall events.
+- To improve on this pest and disease alert system, this model can be refined to use weekly aggregations, and intake more data if there are no computational constraints for analysis.
 
-Implications: Producers Direct should prioritize "Warm + Wet" alerts. A combination of seasonal rain and high heat forecasts would be important to implement for pest advisory campaigns.
+### Strong Predictive Success for 'Pests & Disease' and 'Market' Topics
+The model for "Pests & Disease" questions achieved a positive R^2 score (0.18) and a "Strong" performance rating, meaning that test RMSE was lower than the standard deviation of the test set
 
-### The Limits of National-Level Prediction
-The predictive model yielded a negative R^2 score (-5.35) for question volume.
+'Pest & Disease' RMSE: 18.90
+'Market' RMSE: 22.31
 
-This metric confirms that Country-level weather is too broad to predict localized spikes. A difference in weather in different regions average out to "Normal" in the dataset, which washes out the signal.
-
-Despite the poor volume prediction, the model predictions follow the general trend of the actual data, confirming that farming calendars (month_num) are the baseline driver of farmers' questions.
+**Implications for Producers Direct:**
+- There is a strong confidence in using the model for predicting these topics, and this model can be used to further refine this model by incorporating weekly aggregation and regional data, which can eventually used for future automated systems.
+-  Livestock and Crop questions showed higher variance, suggesting they are driven by other factors.
 
 ## Visualizations
 
-###  Actual vs. Predicted Question Volume (The "Trend" Insight)
-http://localhost:8888/lab/tree/Challenge%201%20_Weather%20Patterns/allisonsibrian/predictions_and_actual.png
+###  
+http://localhost:8888/lab/tree/Challenge%201%20_Weather%20Patterns/allisonsibrian/ug_weather_topic_trends.png
 
-**Interpretation**: The Predicted Line (Green) tends to rise and fall in sync with the Actual Line (Black). This proves the model successfully learned the seasonal cycle of farmer needs. Due to the lack of regional data, the model lacks the granular location data to predict how many questions will be asked during a specific instance. 
+**Interpretation**: 
+Although hard to tell, both big and smaller peaks for 'Pests & Disease' questions tend to occur when there is a high rainfall the month before in Uganda.
 
-### Feature Importance
+### Feature Importance for 'Pests & Disease' Questions
 http://localhost:8888/lab/tree/Challenge%201%20_Weather%20Patterns/allisonsibrian/feature_importances.png
 
-**Interpretation**: Heat and Seasonality dominate the model, validating the recommendation to shift content strategy toward temperature-based alerts and seasonal calendars.
+**Interpretation**: 
+This chart shows the model's validation and prediction logic 
+- Year and Month set the baseline volume, meaning that the primary drivers are users using the platform and the seasonal farming calendar.
+- 1-Month Lagged Rainfall and 1-Month Lagged Heat follow showing that vegetation growth and heat creates an incubation period for pests, which could sit at ~ 1 month or less. 
 
 ## Limitations and Challenges
 
 ### Data Limitations
-- Weather and Questions were averaged at the Country Level. This is the primary reason for the low predictive accuracy (R^2).
-- Training on only 792 aggregated data points (derived from the 0.5% sample and aggregating) limited the model's ability to learn complex non-linear patterns.
+- Weather and Questions were averaged at the country level. Averaging to country level leaves out of micro-climates, and limits the model's ability to predict the exact volume of topic question count.
+- Training on aggregated monthly data points limited the model's ability to learn non-linear patterns.
 
 ### Technical Challenges
-- Computational constraints: Translating 21.5 million rows was not possible due to computational constraints. I used a 0.5% sampling strategy per language group as it was a necessary trade-off between translation quality and processing time.
-- Translation accuracy issues: Some translations resulted in hallucinations (e.g., "Attorney General"). This required implementing keyword filtering to obtain usable data. 
+- Translating 21.5 million rows was not possible due to computational constraints. I used a 0.5% sampling strategy per language group as it was a necessary trade-off between translation quality and processing time.
+- Some translations resulted in hallucinations (e.g., "Attorney General"). This required implementing keyword filtering to obtain usable data. 
 
 ## Next Steps and Recommendations
 
 ### For Further Analysis
-1.  If future datasets include User Location (Region/County), analysis could be stronger with these new geospatial points.
-2.  Specifying topics: Could specify topics (i.e. 'Crops') as different crops have different weather sensitivities.
+1. To expand and create a robust pest and disease alert system, it would be best to move from monthly to weekly aggregation. A weekly model would likely increase the R^2 score significantly.
+2. To expand this analysis, incorporating user location would allow for better forecasting as this country-level analysis is masking micro-climates that occur in a country.
+3. Splitting and further specifying topic questions would help (i.e., 'Crops') as different crops have different weather sensitivities.
 
 ### For Producers Direct
-1. Can deploy and utilize the Random Forest model to flag high-risk months.
-2. Moving towards a seasonal farmer calendar 'alert' approach would be helpful, which was validated by the month_num signal.
+Utilizing the prediction model to create a robust alert or high-risk month or market campaigns can be done by specifying feature attributes and incorporating seasonal farming calendars as Month was a big predictor in predicting 'Pest & Disease' questions. 
+
+I recommend incorporating regional data in the model, aggregating at a weekly-level and specifying questions to create a stronger model.
 
 ## Contact and Collaboration
 
@@ -96,4 +105,4 @@ http://localhost:8888/lab/tree/Challenge%201%20_Weather%20Patterns/allisonsibria
 - Thanks to Bashir Alsuty for the de-duplicated data split by language files, and Steven Yan for the Comet Scores on translation models for Swahili, Luganda, and Runyankole, as they were used in my pre-processing stage.
 ---
 
-**Last Updated**: November 27th, 2025
+**Last Updated**: November 28th, 2025
