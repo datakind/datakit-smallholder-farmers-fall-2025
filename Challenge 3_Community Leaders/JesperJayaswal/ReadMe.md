@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 v3 Information:
 	
 	This code generates datasets for an interactive dashboard that can be used to find the user IDs of community leaders by topic.
@@ -21,6 +23,7 @@ v3 Information:
 	Use of GenAI: I used Claude for help with misc. coding questions.
 
     
+>>>>>>> c6d1eaefaf26b1ce26f014545fc8090ed0bfd1a4
 v2 Information:
 	
 	The code now generates a table at the end with a summary of the response_users with the 20 most responses.

@@ -156,7 +156,11 @@ This BERTopic distribution chart suggests that the current model parameters stil
 Optimize Clustering Parameters: Refine BERTopic hyperparameters (e.g., min_topic_size, UMAP settings) to reduce the volume of vague or overly broad clusters and improve the specificity of subtopic assignments. 
 
 
+<<<<<<< HEAD
+## Challenge 4: Crop Question Analysis: Analyzing Farmer Demand, Community Supply, and Knowledge Gaps
+=======
 ## Challenge 4: Crop Question Analysis: Analyzing Farmer Demand, Community Supply, and Knowledge Gaps (challenge-4-crop-questions-Analyzing-Farmer-Demand-Community-Supply-and- Knowledge-Gaps.ipynb)
+>>>>>>> c6d1eaefaf26b1ce26f014545fc8090ed0bfd1a4
 
 ## 1. Executive Summary
 
@@ -240,6 +244,9 @@ The following reports quantify the relationship between farmer necessity and pla
 
 ### Next Steps:
 
+<<<<<<< HEAD
+1. **Knowledge Quality Assessment (BERTopic)**: Implement BERTopic to analyze community response content, shifting the focus from mere answer length to knowledge focus and quality to precisely identify true information gaps.
+=======
 1. **Knowledge Quality Assessment (TF-IDF)**: The initial assessment of knowledge quality, shifting focus from mere answer length to semantic depth, has been completed using the Group-wise TF-IDF model.
 
 
@@ -349,3 +356,4 @@ The four charts provide a complete diagnostic view, moving from basic frequency 
 
 1.  **Actionable Content Strategy:** Use the insights from the Prioritization Matrix to guide specialized content creation for the high-gap, low-volume topics.
 2.  **Knowledge Quality Assessment (BERTopic)**: Implement BERTopic to analyze community response content, shifting the focus from mere answer length to knowledge focus and quality to precisely identify true information gaps.
+>>>>>>> c6d1eaefaf26b1ce26f014545fc8090ed0bfd1a4

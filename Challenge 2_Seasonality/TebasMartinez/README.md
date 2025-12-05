@@ -1,4 +1,8 @@
 # Challenge 2 - Seasonality
+<<<<<<< HEAD
+## Running `Data Cleaning.ipynb`
+To run the data cleaning code in the notebook, you'll need to add the Producers Direct dataset file originally provided in the [DataKit](https://docs.google.com/document/d/1jKTmb8R5GlM9uqQkB5fXd37o2bdX17JKB36mK-NqWFE/edit?usp=sharing) under `data/raw/pd_dataset.csv`.
+=======
 ## Overview
 Seasonality analysis of WeFarm dataset as suggested in Challenge 2 of the [Producers Direct DataKit Brief](https://docs.google.com/document/d/1jKTmb8R5GlM9uqQkB5fXd37o2bdX17JKB36mK-NqWFE/edit?tab=t.0).
 
@@ -58,3 +62,4 @@ Deepseek was used to generate the dictionary with question types (categories) in
 
 ## Running this directory
 To run the code in the `Data Cleaning.ipynb` notebook, the Producers Direct dataset file originally provided in the [DataKit](https://docs.google.com/document/d/1jKTmb8R5GlM9uqQkB5fXd37o2bdX17JKB36mK-NqWFE/edit?usp=sharing) must be added under `data/raw/pd_dataset.csv`. All remaining data files needed for the next steps are generated through that notebook.
+>>>>>>> c6d1eaefaf26b1ce26f014545fc8090ed0bfd1a4
