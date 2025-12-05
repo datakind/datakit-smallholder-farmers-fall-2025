@@ -1,0 +1,1 @@
+These hold some of the scripts you can use to plug and play to run chi-square analyses, or further validate your data in Tableau (e.g., to be sure how you set up the quick table calculations matches the needs)

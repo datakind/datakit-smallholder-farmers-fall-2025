@@ -1,0 +1,6 @@
+wefarm dataset: https://drive.google.com/file/d/17k0lAx7OKRHv8SnjIcoSzKbZI6BeOi4R/view?usp=drive_link
+broad categories: https://drive.google.com/file/d/1A4mNb34f8mYjzeYAyNqtTzDW8NehYSbI/view?usp=drive_link
+niche categories:
+https://drive.google.com/file/d/14ET6iTXqdEPi1b6zOdn9d6Y9KRRf1YbG/view?usp=drive_link
+segments json: https://drive.google.com/file/d/1OQ0OkxTMC9g8GKkiGotVyOhmOVxoeQdX/view?usp=drive_link
+all_dashboard_data: https://drive.google.com/file/d/10MgkPTFO5Dux4A_72gWJxOX08ux_rMet/view?usp=drive_link

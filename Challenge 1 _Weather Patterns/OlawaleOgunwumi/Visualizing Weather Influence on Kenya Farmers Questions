@@ -1,0 +1,66 @@
+#Visualizing  Kenyan  farmers  question frequency
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load your dataset
+df = pd.read_csv("processed_questions.csv", encoding='latin1')
+
+# Inspect columns if needed
+print(df.columns)
+
+# Plot the time series
+plt.figure(figsize=(12, 6))
+plt.plot(df["Farmers_questions"], df["Question_frequency"], marker="x")
+plt.title("Kenyan Farmers question frequency")
+plt.xlabel("Questions")
+plt.xticks(rotation=90)
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+
+ 
+
+PYTHON CODE FOR WEATHER INFLUENCE ON KENYAN FARMERS QUESTION (PLOTTING  LARGE VALUE COLUMNS AND SMALL VALUE COLUMNS ON SEPARATE Y-AXIS I.E., LEFT Y-AXIS AND RIGHT Y-AXIS)
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read CSV
+df = pd.read_csv("processed_questions.csv", encoding='latin1')
+
+# x-axis value
+df['X_Label'] = df['Farmers_questions'].astype(str)
+
+# Create figure and first axis
+fig, ax1 = plt.subplots(figsize=(12,6))
+
+# Plotting first 3 columns with lower values on left y-axis
+ax1.plot(df['X_Label'], df['Question_frequency'], marker='o', label='Question_frequency')
+ax1.plot(df['X_Label'], df['Avg_Min_Temp/oC'], marker='s', label='Avg_min_Temp')
+ax1.plot(df['X_Label'], df['Avg_Max_Temp /oC'], marker='^', label='Avg_Max_Temp')
+ax1.set_xlabel("Farmers Questions")
+ax1.set_ylabel("Value1")
+ax1.tick_params(axis='x', rotation=90)
+
+# Create second y-axis for larger precipitation value
+ax2 = ax1.twinx()
+ax2.plot(df['X_Label'], df['Avg_Precipitation /mm'], marker='d', color='red', label='Avg_Precipitation')
+ax2.set_ylabel("Value2")
+
+# Combine legends
+lines, labels = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(lines + lines2, labels + labels2, loc='upper left')
+
+plt.title("Weather Influence on Kenyan Farmers Questions (Dual Y-Axis)")
+plt.tight_layout()
+plt.show()
+
+
+
+ 
+
+
+The work contains insights from the visualization of weather conditions influence on Kenyan farmers questions. The graphs (two graphs), created from Python scripts in Google Colab, revealed the most frequent kinds of questions asked by farmers in Kenya (Graph 1), and what kinds of questions farmers asked given a particular weather condition (Graph 2). In graph 2, at high precipitation (high rainfall or flooding), farmers asked questions around cows' inability to produce milk (e.g., "Why is my cow not producing milk?"). This is consistent with the reduction in feed quality, increased exposure of animals to parasites and diseases, lower overall grazing time, high humidity causing stress, reduced appetite, and energy levels, and inability to self-cool, happening the high precipitation weather condition. At low precipitation (drought), graph 2 revealed that farmers in Kenya often asked questions around weed control (e.g., "I am a maize farmer but planted and there are flowers of Pingi growing and killing the maize. What medicine can I use?") as invasive weeds compete with crops like maize during this climate conditions. This insight is consistent with the ability of weeds to thrive in droughts than maize (which is very sensitive to water stress), due to deeper roots and faster germination, causing stunted growth in the crop and even death.  

@@ -1,0 +1,78 @@
+================================================================================
+PRODUCERS DIRECT: TOP 10 PRIORITIZED NEEDS ANALYSIS
+================================================================================
+Total Clusters Analyzed: 2313 (excluding noise)
+Total Questions Analyzed: 99728
+
+This report ranks clusters by 'Severity Score' (Cluster Frequency * Financial Urgency Weight).
+It identifies the most impactful problems requiring immediate strategic attention.
+================================================================================
+
+RANK #1 | SCORE: 0.7364% | Cluster ID: 1627
+  > Primary Need: Working Capital
+  > Size/Frequency: 816 questions (0.82% of total)
+      > Strategic Opportunity: Seasonal Input Financing for Fertilizer and
+    Seeds
+----------------------------------------
+
+RANK #2 | SCORE: 0.4252% | Cluster ID: 1976
+  > Primary Need: Risk Mitigation/Insurance
+  > Size/Frequency: 530 questions (0.53% of total)
+      > Strategic Opportunity: Conflict Risk Parametric Insurance (Payout
+    triggered by displacement or verified insecurity metrics)
+----------------------------------------
+
+RANK #3 | SCORE: 0.3657% | Cluster ID: 1494
+  > Primary Need: Asset Financing
+  > Size/Frequency: 521 questions (0.52% of total)
+      > Strategic Opportunity: Solar-powered Water Pump Financing or
+    Hydroponic System Credit
+----------------------------------------
+
+RANK #4 | SCORE: 0.2401% | Cluster ID: 1992
+  > Primary Need: Working Capital
+  > Size/Frequency: 266 questions (0.27% of total)
+      > Strategic Opportunity: Micro-loan for diversifying income streams
+    or financing a small, non-farm enterprise based on the 'no work' theme.
+----------------------------------------
+
+RANK #5 | SCORE: 0.1941% | Cluster ID: 1753
+  > Primary Need: Risk Mitigation/Insurance
+  > Size/Frequency: 242 questions (0.24% of total)
+      > Strategic Opportunity: Area-Yield Index Insurance or Crop Failure
+    Payout
+----------------------------------------
+
+RANK #6 | SCORE: 0.1751% | Cluster ID: 2267
+  > Primary Need: None/Information Need
+  > Size/Frequency: 873 questions (0.88% of total)
+      > Strategic Opportunity: Improved Customer Service/Callback Protocol
+----------------------------------------
+
+RANK #7 | SCORE: 0.1366% | Cluster ID: 1524
+  > Primary Need: None/Information Need
+  > Size/Frequency: 681 questions (0.68% of total)
+      > Strategic Opportunity: Agricultural Advice Hotline Subscription
+----------------------------------------
+
+RANK #8 | SCORE: 0.0943% | Cluster ID: 1652
+  > Primary Need: None/Information Need
+  > Size/Frequency: 470 questions (0.47% of total)
+      > Strategic Opportunity: Data quality analysis or technical support
+    request to decode garbled text
+----------------------------------------
+
+RANK #9 | SCORE: 0.0908% | Cluster ID: 2008
+  > Primary Need: None/Information Need
+  > Size/Frequency: 453 questions (0.45% of total)
+      > Strategic Opportunity: Logistical Support: Troubleshooting
+    communication barriers (SIM cards, photo uploads) required for
+    verification or services.
+----------------------------------------
+
+RANK #10 | SCORE: 0.0868% | Cluster ID: 1990
+  > Primary Need: None/Information Need
+  > Size/Frequency: 433 questions (0.43% of total)
+      > Strategic Opportunity: Data Quality Improvement/Translation
+    Correction (Input data is incoherent)
+----------------------------------------

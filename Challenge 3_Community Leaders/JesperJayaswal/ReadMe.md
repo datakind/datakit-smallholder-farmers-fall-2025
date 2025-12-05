@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+=======
+v3 Information:
+	
+	This code generates datasets for an interactive dashboard that can be used to find the user IDs of community leaders by topic.
+
+    Link to dashboard: 
+        https://lookerstudio.google.com/reporting/80f5d502-9839-4e28-b6e2-72f8e34d38d6
+        (FYI it can take a few minutes to load the data into the dashboard)
+
+	Code:
+		Challenge3_Jesper_v3_Leaders_by_topic_Dashboard.ipynb 
+		To run the notebook, save the raw dataset as "datakit.csv" in a subfolder titled "Raw_data". The notebook will save the raw dataset into a parquet file, which is much smaller and which can be used in subsequent runs of the notebook.
+    	
+	Dependencies:
+		Python 2.7.15
+		Jupyter 7.4.5
+		pandas 2.3.2
+		matplotlib 3.10.6
+		pyarrow 22.0.0
+        scipy 1.16.1
+
+	Use of GenAI: I used Claude for help with misc. coding questions.
+
+    
+>>>>>>> c6d1eaefaf26b1ce26f014545fc8090ed0bfd1a4
 v2 Information:
 	
 	The code now generates a table at the end with a summary of the response_users with the 20 most responses.
