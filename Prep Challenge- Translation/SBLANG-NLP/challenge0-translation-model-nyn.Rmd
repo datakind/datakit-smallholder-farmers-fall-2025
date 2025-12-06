@@ -1,0 +1,836 @@
+---
+title: "Prep Challenge0- Translation-Nyankore 2"
+author: "SBLANG"
+date: "2025-11-19"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    code_folding: hide
+    number_Sections: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Setup
+
+```{r}
+
+# Import packages
+
+suppressPackageStartupMessages(library('tidyverse'))
+suppressPackageStartupMessages(library('arrow'))
+suppressPackageStartupMessages(library('sparklyr'))
+suppressPackageStartupMessages(library('duckdb'))
+suppressPackageStartupMessages(library('DBI'))
+suppressPackageStartupMessages(library('magrittr'))
+# suppressPackageStartupMessages(library('keras'))
+suppressPackageStartupMessages(library('tfdatasets', exclude = c("shape")))
+suppressPackageStartupMessages(library('keras3'))
+suppressPackageStartupMessages(library('sparktf'))
+suppressPackageStartupMessages(library('sacRebleu'))
+suppressPackageStartupMessages(library('splitTools'))
+# reticulate::py_require("keras-hub==0.18.1")
+# reticulate::import("keras")
+# reticulate::import("keras_hub")
+sc <- spark_connect(master = "local", version = "2.4", log = "console")
+
+```
+
+# Data Preparation
+## Load data
+
+```{r}
+
+dev_parq <- open_dataset(source = '~/../../mnt/e/dev-00000-of-00001.parquet')
+# head(dev_parq)
+dev_parq |> glimpse()
+
+test_parq <- open_dataset(source = '~/../../mnt/e/test-00000-of-00001.parquet')
+# head(test_parq)
+test_parq |> glimpse()
+
+train_parq <- open_dataset(source = '~/../../mnt/e/train-00000-of-00001.parquet')
+# head(train_parq)
+train_parq |> glimpse()
+
+
+```
+
+```{r}
+
+train_nyn <- InMemoryDataset$create(as.data.frame(train_parq))
+train_nyn <- train_parq |> 
+  select(nyn_text, eng_source_text) |>
+  to_duckdb() |>
+  collect() #|>
+
+test_nyn <- InMemoryDataset$create(as.data.frame(test_parq))
+test_nyn <- test_parq |> 
+  select(nyn_text, eng_source_text) |>
+  to_duckdb() |>
+  collect()
+
+dev_nyn <- InMemoryDataset$create(as.data.frame(dev_parq))
+dev_nyn <- dev_parq |> 
+  select(nyn_text, eng_source_text) |>
+  to_duckdb() |>
+  collect()
+
+
+```
+
+
+```{r}
+
+
+# optional
+train_nyn_eng <- sparklyr::copy_to(sc, train_nyn, overwrite = T)
+test_nyn_eng <- sparklyr::copy_to(sc, test_nyn, overwrite = T)
+dev_nyn_eng <- sparklyr::copy_to(sc, dev_nyn, overwrite = T)
+
+```
+
+
+```{r}
+
+
+# optional
+dbGetQuery(sc, "SELECT * FROM dev_nyn limit 10")
+count(dev_nyn_eng)
+
+
+```
+
+
+```{r}
+
+# optional
+# mode = "overwrite" # if needed
+spark_write_csv(train_nyn_eng, '~/../../mnt/e/train_nyn_eng.csv', delimeter = "\t", quote = "ʼ")
+spark_write_csv(test_nyn_eng, '~/../../mnt/e/test_nyn_eng.csv', delimeter = "\t", quote = "ʼ")
+spark_write_csv(dev_nyn_eng, '~/../../mnt/e/dev_nyn_eng.csv', delimeter = "\t", quote = "ʼ")
+
+```
+
+
+```{r}
+
+train_text <- "~/../../mnt/e/train_nyn_eng.csv/part-00000-cd5a067d-f8bb-4a27-967f-fd6f67519bcf-c000.csv"
+train_pairs <- train_text %>%
+  readr::read_csv(skip = 1, col_names = c("nyn", "english"), quote = "ʼ",   
+                  col_types = c("cc")) %>%
+  within(nyn %<>% stringr::str_replace_all(pattern = "�", replacement = "")) %>% 
+  within(english %<>% stringr::str_replace_all(pattern = "�", replacement = "")) %>% 
+  within(english %<>% paste("[start]", ., "[end]"))
+
+# train_pairs <- copy_to(sc, train_pairs, overwrite = T)
+# copy_to(sc, train_pairs, overwrite = T) %>%
+#   spark_write_tfrecord(path = "~/../../mnt/e/tfrecord/train")
+
+
+```
+
+
+```{r}
+
+# optional
+
+# head(train_pairs)
+# dbGetQuery(sc, "SELECT * FROM train_pairs limit 10")
+# head(train_pairs)
+training <- tfrecord_dataset("~/../../mnt/e/tfrecord/train/part-r-00000")
+glimpse(training)
+train_dataset <- dataset_snapshot(dataset = training, path = "~/../../mnt/e/tfrecord/train/part-r-00000") 
+# training %>% reticulate::as_iterator() %>% reticulate::iter_next()
+# training %>% 
+#   dataset_take(5) %>%
+#   coro::collect(5) %>%
+#   str()
+
+glimpse(train_dataset)
+
+# train_dataset %>%
+#   dataset_take(25) %>%
+#   as_iterator() %>%
+#   iter_next() %>%
+#   print()
+
+```
+
+
+```{r}
+
+
+test_text <- "~/../../mnt/e/test_nyn_eng.csv/part-00000-93aeea83-e894-4081-b682-e75cb8c6f00d-c000.csv"
+test_pairs <- test_text %>%
+  readr::read_csv(skip = 1, col_names = c("nyn", "english"), quote = "ʼ",
+                  col_types = c("cc")) %>%
+  within(nyn %<>% stringr::str_replace_all(pattern = "�", replacement = "")) %>% 
+  within(english %<>% stringr::str_replace_all(pattern = "�", replacement = "")) %>% 
+  within(english %<>% paste("[start]", ., "[end]"))
+# test_pairs <- copy_to(sc, test_pairs, overwrite = T)
+# copy_to(sc, test_pairs, overwrite = T) %>%
+#   spark_write_tfrecord(path = "~/../../mnt/e/tfrecord/test")
+
+
+dev_text <- "~/../../mnt/e/dev_nyn_eng.csv/part-00000-52a7e35f-c097-4361-a92d-aab141c20df0-c000.csv"
+dev_pairs <- dev_text %>%
+  readr::read_csv(skip = 1, col_names = c("nyn", "english"), quote = "ʼ",
+                  col_types = c("cc")) %>%
+  within(nyn %<>% stringr::str_replace_all(pattern = "�", replacement = "")) %>% 
+  within(english %<>% stringr::str_replace_all(pattern = "�", replacement = "")) %>% 
+  within(english %<>% paste("[start]", ., "[end]"))
+# dev_pairs <- copy_to(sc, dev_pairs, overwrite = T)
+# copy_to(sc, dev_pairs, overwrite = T) %>%
+#   spark_write_tfrecord(path = "~/../../mnt/e/tfrecord/val")
+
+
+
+```
+
+
+
+
+```{r}
+
+#optional
+
+testing <- tfrecord_dataset("~/../../mnt/e/tfrecord/test/part-r-00000")
+testing_dataset <- dataset_snapshot(dataset = testing, path = "~/../../mnt/e/tfrecord/test/part-r-00000")
+
+validation <- tfrecord_dataset("~/../../mnt/e/tfrecord/val/part-r-00000")
+val_dataset <- dataset_snapshot(dataset = validation, path = "~/../../mnt/e/tfrecord/val/part-r-00000") 
+
+
+
+```
+
+
+
+# Model building
+## Sequence-to-sequence RNN model
+
+```{r}
+
+
+vocabulary_max <- 15000
+sequence_len <- 30
+
+source_vec <- layer_text_vectorization(
+  max_tokens = vocabulary_max,
+  output_mode = "int", 
+  output_sequence_length = sequence_len
+)
+
+target_vec <- layer_text_vectorization(
+  max_tokens = vocabulary_max, 
+  output_mode = "int", 
+  output_sequence_length = sequence_len + 1
+)
+
+adapt(source_vec, train_pairs$nyn)
+adapt(target_vec, train_pairs$english)
+
+# optional
+# train_pairs_nyn <- tbl(sc, "train_pairs") %>%
+#   select(nyn)
+# adapt(source_vec, pull(train_pairs_nyn))
+# 
+# train_pairs_eng <- tbl(sc, "train_pairs") %>%
+#   select(english)
+# adapt(target_vec, pull(train_pairs_eng))
+
+
+
+```
+
+
+
+### Prepare dataset
+
+```{r}
+
+format_pairs <- function(pair) {
+  nyn <- pair$nyn |> source_vec()
+  english <- pair$english |> target_vec()
+  
+  eng_feature <- english@r[NA:-2]
+  eng_target <- english@r[2:NA]
+  
+  features <- list(nyn = nyn, english = eng_feature)
+  labels <- eng_target
+  sample_weight <- labels !=0
+  
+  tuple(features, labels, sample_weight)
+
+}
+
+batch_size <- 64
+
+make_dataset <- function(pairs) {
+  tensor_slices_dataset(pairs) |>
+    dataset_map(format_pairs, num_parallel_calls = 4) |>
+    dataset_cache() |>
+    dataset_shuffle(2048) |>
+    dataset_batch(batch_size) |>
+    dataset_prefetch(16)
+}
+
+
+```
+
+
+
+
+```{r}
+
+
+train_ds <- make_dataset(train_pairs)
+val_ds <- make_dataset(dev_pairs)
+
+# train_ds <- make_dataset(collect(train_pairs))
+# val_ds <- make_dataset(collect(dev_pairs))
+
+
+
+```
+
+
+
+
+```{r}
+
+
+.[inputs, targets] <- iter_next(as_iterator(train_ds))
+str(inputs)
+str(targets)
+
+```
+
+
+
+
+```{r}
+
+inputs <- keras_input(shape = c(sequence_len), dtype = "int64")
+
+outputs <- inputs |>
+  layer_embedding(input_dim = vocabulary_max, output_dim = 128) |>
+  layer_lstm(32, return_sequences = T) |>
+  layer_dense(vocabulary_max, activation = "softmax")
+
+model <- keras_model(inputs, outputs)
+
+
+```
+
+
+
+
+
+```{r}
+
+embed_dim <- 256
+hidden_dim <- 1024
+
+source <- keras_input(shape = c(NA), dtype = "int32", name = "nyn")
+
+encoder_output <- source |>
+  layer_embedding(vocabulary_max, embed_dim, mask_zero = T) |>
+  bidirectional(layer_gru(units = hidden_dim), merge_mode = "sum")
+
+
+```
+
+
+
+```{r}
+
+
+target <- keras_input(shape = c(NA), dtype = "int32", name = "english")
+
+rnn_layer <- layer_gru(units = hidden_dim, return_sequences = T)
+
+target_predict <- target |>
+  layer_embedding(vocabulary_max, embed_dim, mask_zero = T) |>
+  rnn_layer(initial_state = encoder_output) |>
+  layer_dropout(0.5) |>
+  layer_dense(vocabulary_max, activation = "softmax")
+
+seq2seq_rnn <- keras_model(inputs = list(source, target),
+                           outputs = target_predict)
+  
+
+
+```
+
+
+
+```{r}
+
+seq2seq_rnn |> compile(
+  optimizer = "adam",
+  loss = "sparse_categorical_crossentropy",
+  weighted_metrics = "accuracy"
+  )
+
+
+```
+
+
+
+### Fit model
+
+```{r}
+
+fit(seq2seq_rnn, train_ds, epochs = 15, validation_data = val_ds)
+
+
+```
+
+
+
+### Predict with RNN model
+
+```{r}
+
+
+max_decoded_sentence_len <- 30
+
+eng_vocab <- get_vocabulary(target_vec)
+
+generate_translation <- function(input_sentence) {
+
+  tokenized_input_sentence <- source_vec(list(input_sentence))
+  decoded_sentence <- "[start]"
+
+  for (i in seq(max_decoded_sentence_len)) {
+    tokenized_target_sentence <- target_vec(list(decoded_sentence))
+
+    next_token_predictions <- seq2seq_rnn |>
+      predict(list(tokenized_input_sentence,
+                   tokenized_target_sentence),
+              verbose = 0)
+
+    sampled_token_index <- which.max(next_token_predictions[, i, ])
+    sampled_token <- eng_vocab[sampled_token_index]
+
+    decoded_sentence <- paste(decoded_sentence, sampled_token)
+
+    # if (sampled_token == "[end]")
+    #   break
+    
+  }
+
+  decoded_sentence
+}
+
+for (i in seq(20)) {
+  input_sentence <- sample(test_pairs$nyn, 1)
+  print(input_sentence)
+  print(generate_translation(input_sentence))
+  print("---")
+}
+
+
+
+```
+
+
+## Sequence to Sequence Transformer Model
+
+```{r}
+
+
+layer_transformer_encoder <- new_layer_class(
+  classname = "TransformerEncoder",
+  
+  initialize = function(hidden_dim, intermediate_dim, num_heads, ...) {
+    super$initialize(...)
+    
+    key_dim <- hidden_dim %/% num_heads
+    
+    self$self_attention <- layer_multi_head_attention(
+      num_heads = num_heads,
+      key_dim = embed_dim)
+    self$self_attention_layernorm <- layer_layer_normalization()
+    self$feed_forward_1 <- layer_dense(, intermediate_dim, activation = "relu")
+    self$feed_forward_2 <- layer_dense(, hidden_dim)
+    self$feed_forward_layernorm <- layer_layer_normalization()
+  },
+  
+  call = function(source, source_mask) {
+    residual <- x <- source
+    mask <- source_mask@r[, newaxis, ]
+    
+    x <- self$self_attention(
+      query = x,
+      key = x,
+      value = x,
+      attention_mask = mask
+    )
+    
+    x <- x + residual
+    x <- x |> self$self_attention_layernorm()
+    
+    residual <- x
+    
+    x <- x |>
+      self$feed_forward_1() |>
+      self$feed_forward_2()
+    
+    x <- x + residual
+    x <- x |> self$feed_forward_layernorm()
+    x
+  }
+)
+
+
+```
+
+
+
+
+```{r}
+
+layer_positional_embedding <- new_layer_class(
+  "PositionalEmbedding",
+  initialize = function(sequence_length, input_dim, output_dim) {
+    super$initialize()
+    self$token_embeddings <- layer_embedding(input_dim = input_dim,
+                                             output_dim = output_dim)
+    self$position_embeddings <- layer_embedding(input_dim = sequence_length,
+                                                output_dim = output_dim)
+  },
+  call = function(inputs) {
+    .[.., sequence_length] <- op_shape(inputs)
+    positions <-
+      op_arange(0, sequence_length - 1, dtype = "int32") |>
+      op_expand_dims(1)
+    embedded_tokens <- self$token_embeddings(inputs)
+    embedded_positions <- self$position_embeddings(positions)
+    embedded_tokens + embedded_positions
+  }
+)
+
+
+```
+
+
+
+
+```{r}
+
+
+layer_transformer_decoder <- new_layer_class(
+  classname = "TransformerDecoder",
+  
+  initialize = function(hidden_dim, intermediate_dim, num_heads, ...) {
+    super$initialize(...)
+    
+    key_dim <- hidden_dim %/% num_heads
+    
+    self$self_attention <- layer_multi_head_attention(
+      num_heads = num_heads, 
+      key_dim = key_dim)
+    
+    self$cross_attention <- layer_multi_head_attention(
+      num_heads = num_heads, 
+      key_dim = key_dim
+      )
+    self$self_attention_layernorm <- layer_layer_normalization()
+    self$cross_attention_layernorm <- layer_layer_normalization()
+    self$feed_forward_1 <- layer_dense(, intermediate_dim, activation = "relu")
+    self$feed_forward_2 <- layer_dense(, hidden_dim)
+    self$feed_forward_layernorm <- layer_layer_normalization() 
+  },
+  
+  call = function(target, source, source_mask) {
+    residual <- x <- target
+    x <- self$self_attention(query = x, key = x, value = x,
+                             use_causal_mask = TRUE)
+    x <- x + residual
+    x <- self$self_attention_layernorm(x)
+
+    residual <- x
+    mask <- source_mask@r[, newaxis, ]
+    x <- self$cross_attention(
+      query = x, key = source, value = source,
+      attention_mask = mask
+    )
+    x <- x + residual
+    x <- x |> self$cross_attention_layernorm()
+
+    residual <- x
+    x <- x |>
+      self$feed_forward_1() |>
+      self$feed_forward_2()
+    x <- x + residual
+    x <- self$feed_forward_layernorm(x)
+
+    x
+  }
+)
+
+
+
+```
+
+
+
+```{r}
+
+hidden_dim <- 256
+intermediate_dim <- 2048
+num_heads <- 8
+
+encoder <- layer_transformer_encoder(
+  hidden_dim = hidden_dim,
+  intermediate_dim = intermediate_dim,
+  num_heads = num_heads)
+
+decoder <- layer_transformer_decoder(
+  hidden_dim = hidden_dim,
+  intermediate_dim = intermediate_dim,
+  num_heads = num_heads)
+
+source <- keras_input(shape = NA, dtype = "int32", name = "nyn")
+
+encoder_output <- source |>
+  layer_positional_embedding(sequence_len, vocabulary_max, hidden_dim) |>
+  encoder(source_mask = source != 0L)
+
+target <- keras_input(shape = list(NULL), dtype = "int32", name = "english")
+
+target_predictions <- target |>
+  layer_positional_embedding(sequence_len, vocabulary_max, hidden_dim) |>
+  decoder(source = encoder_output, source_mask = source != 0L) |>
+  layer_dropout(rate = 0.5) |>
+  layer_dense(units = vocabulary_max, activation = "softmax")
+
+transformer <- keras_model(
+  inputs = list(source, target),
+  outputs = target_predictions
+)
+
+transformer
+
+transformer |> compile(
+  optimizer = "adam",
+  loss = "sparse_categorical_crossentropy",
+  weighted_metrics = "accuracy"
+)
+
+
+```
+
+
+
+```{r}
+
+transformer |> fit(train_ds, epochs = 15, validation_data = val_ds)
+
+# transformer %>%
+#   fit(train_dataset, epochs = 30, validation_data = val_dataset)
+
+
+```
+
+
+### Predict translation with transformer
+
+```{r}
+
+
+eng_vocab <- get_vocabulary(target_vec)
+
+generate_translation <- function(input_sentence) {
+
+  tokenized_input_sentence <- source_vec(array(input_sentence, dim = c(1, 1)))
+  decoded_sentence <- "[start]"
+
+  for (i in seq(max_decoded_sentence_len)) {
+    tokenized_target_sentence <- target_vec(array(decoded_sentence, dim = c(1, 1)))
+    tokenized_target_sentence <- tokenized_target_sentence@r[, NA:-2]
+
+    inputs <- list(nyn = tokenized_input_sentence,
+                   english = tokenized_target_sentence)
+    next_token_predictions <- predict(transformer, inputs, verbose = 0)
+
+    sampled_token_index <- which.max(next_token_predictions[1, i, ])
+    sampled_token <- eng_vocab[sampled_token_index]
+
+    decoded_sentence <- paste(decoded_sentence, sampled_token)
+
+    if (sampled_token == "[end]")
+      break
+  }
+
+  decoded_sentence
+}
+
+for (i in sample.int(nrow(test_pairs), 10)) {
+  # input_sentence = sample(pull(test_pairs_nyn), 1)
+  input_sentence = sample(test_pairs$nyn, 1)
+  print(input_sentence)
+  print(generate_translation(input_sentence))
+  print("---")
+
+}
+
+
+
+```
+
+
+## Expand dataset
+### Load data
+
+```{r}
+
+
+word_list <- read.table(file = "~/../../mnt/e/train.csv", header = T, sep = "\t") |>
+    within(english %<>% paste("[start]", ., "[end]"))
+word_list <- rbind(word_list, collect(train_pairs))
+
+
+```
+
+
+### Split dataset
+
+```{r}
+
+
+set.seed(254)
+
+idxs <- partition(word_list$nyn, p = c(train = 0.8, valid = 0.1, test = 0.1),
+                  type = "basic", 
+                  split_into_list = T)
+str(idxs)
+
+ext_train_ds <- word_list[idxs$train, ]
+ext_val_ds <- word_list[idxs$valid, ]
+ext_test_ds <- word_list[idxs$test, ]
+
+ext_train_ds <- make_dataset(ext_train_ds)
+ext_val_ds <- make_dataset(ext_val_ds)
+ext_test_ds <- make_dataset(ext_test_ds)
+
+
+```
+
+
+### Fit to expanded model
+
+```{r}
+
+
+vocabulary_max <- 20000
+
+sequence_len <- 40
+
+transformer |> fit(ext_train_ds, epochs = 20, validation_data = ext_val_ds)
+
+
+```
+
+
+
+### Predict translation with expanded transformer model
+
+```{r}
+
+
+max_decoded_sentence_len <- 30
+
+eng_vocab <- get_vocabulary(target_vec)
+
+generate_translation <- function(input_sentence) {
+
+  tokenized_input_sentence <- source_vec(array(input_sentence, dim = c(1, 1)))
+  decoded_sentence <- "[start]"
+
+  for (i in seq(max_decoded_sentence_len)) {
+    tokenized_target_sentence <- target_vec(array(decoded_sentence, dim = c(1, 1)))
+    tokenized_target_sentence <- tokenized_target_sentence@r[, NA:-2]
+
+    inputs <- list(nyn = tokenized_input_sentence,
+                   english = tokenized_target_sentence)
+    next_token_predictions <- predict(transformer, inputs, verbose = 0)
+
+    sampled_token_index <- which.max(next_token_predictions[1, i, ])
+    sampled_token <- eng_vocab[sampled_token_index]
+
+    decoded_sentence <- paste(decoded_sentence, sampled_token)
+
+    if (sampled_token == "[end]")
+      break
+  }
+
+  decoded_sentence
+}
+
+for (i in sample.int(nrow(test_pairs), 10)) {
+  # input_sentence = sample(pull(test_pairs_nyn), 1)
+  input_sentence = sample(test_pairs$nyn, 1)
+  print(input_sentence)
+  print(generate_translation(input_sentence))
+  print("---")
+
+}
+
+
+
+
+```
+
+
+
+### Test with random sample of messages from WeFarm dataset.
+
+
+```{r}
+
+
+generate_translation("E ENTE YANJE EZAIRE ENYENA YASHOBERA.")
+
+
+```
+
+
+
+
+```{r}
+
+
+generate_translation("E embibo ya watermeroni ndagyihahi ndi Amos omuri mpungu")
+
+
+
+```
+
+
+
+```{r}
+
+
+generate_translation("E Nimubaziki Gu Orafuhiriza Enyanya Zitaragarike Oburabyo Bwena Bukagumamu.")
+
+
+```
+
+
+
+
+```{r}
+
+
+generate_translation("E Alex Omwani Tigukakwata Enjura Hasigireyo Nkye Orinde Okwezi Kwakabiri Enjura Yangwa")
+
+
+```
+
