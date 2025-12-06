@@ -1,5 +1,3 @@
-**README content (copy into `README.md`)**
-
 **Project Overview**:  
 - **Name**: Producer Direct — Question Seasonality Analysis  
 - **Purpose**: Analyze and visualize seasonal trends in farmers' questions across Producer Direct countries (Kenya, Uganda, Tanzania, etc.). The analysis classifies each question into a farming season (planting / harvest / off-season) and surfaces seasonal keyword patterns and visualizations.
