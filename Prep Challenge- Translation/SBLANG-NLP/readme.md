@@ -66,9 +66,9 @@ Description of the finding, supported by data and visualizations.
 ## Visualizations
 
 ### Frequent Runyankole Terms
-![unnamed-chunk-19-1.png](SBLANG-NLP/unnamed-chunk-19-1)
+![unnamed-chunk-19-1.png](../SBLANG-NLP/challenge0-translation-nlp-eda-nyn_files/figure-html/unnamed-chunk-19-1.png)
 
-![nyn_freq_terms.tiff](SBLANG-NLP/nyn_freq_terms.tiff)
+![nyn_freq_terms.jpg](nyn_freq_terms.jpg)
 
 **Interpretation**: These bar graphs show the frequency of Runyankole terms in all the messages, both questions, and responses. There's many messages about livestock, such as cows, goats, chickens, and pigs; and some about agriculture, such as beans, coffee beans, and tomatoes; with some other topics such as medicine, and meetings/gatherings. There's cultural significance in the prevalence of a respectful form of address.
 
@@ -99,16 +99,16 @@ Description of the finding, supported by data and visualizations.
 > Refer to the data sources in this readme for details regarding the "manual", and "GPT-5 mini" citations.
 
 ### Sequence-to-Sequence RNN Model Training
-[seq2seq_rnn.html](SBLANG-NLP/seq2seq_rnn.html)
+[seq2seq_rnn.html](seq2seq_rnn.html)
 
-[seq2seq_rnn_plus_vocab.html](SBLANG-NLP/seq2seq_rnn_plus_vocab.html)
+[seq2seq_rnn_plus_vocab.html](seq2seq_rnn_plus_vocab.html)
 
 **Interpretation**: These graphs show the RNN model training metrics before, and after the vocabulary size variable was increased from 1000 to 15000. The model accuracy decreased from 48.9% to 40%, however a more apropriate metric, such as BLEU should be calculated.
 
 ### Transformer Model Training
-[transformer.html](SBLANG-NLP/transformer.html)
+[transformer.html](transformer.html)
 
-[transformer_expanded.html](SBLANG-NLP/transformer_expanded.html)
+[transformer_expanded.html](transformer_expanded.html)
 
 **Interpretation**: This graph shows the transformer model training metrics, before, and after expanding the training dataset with the manually collated word/phrase list from the manual pdf. There's an increase in accuracy from 58.7% to 70.5%, however as stated above, a BLEU score would be more appropriate for model evaluation, and comparison. Unfortunately, the increase in validation loss indicates overfitting, which should be corrected, for example, by adjusting the network's layers.
 
@@ -248,5 +248,5 @@ renv::install.packages("tidyverse")
 
 ---
 
-**Last Updated**: 5 December 2025
+**Last Updated**: 6 December 2025
 **Status**: [Needs Review]
