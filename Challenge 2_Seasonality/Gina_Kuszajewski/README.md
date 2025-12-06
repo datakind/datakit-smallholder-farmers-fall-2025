@@ -92,7 +92,7 @@ Each question is matched to topics using keyword-based rules. Questions not matc
 
 ### Finding 1: Distribution of Assigned Question Types 
 ![Visualization 1](plot4.png)
-A bar chart of the top 10 question types based on keywords reveals that most questions are livestock-focused. Questions about crops and pests are present but account for less than half of livestock-related questions. Other top categories include interwoven topics, such as pests combined with crops.
+A bar chart of the top 10 question types based on keywords reveals that most questions are livestock focused. Questions about crops and pests are present but account for less than half of livestock-related questions. Other top categories include interwoven topics, such as pests combined with crops.
 
 **Implications for Producers Direct:**
 - This shows that, for English-speaking Ugandan farmers, livestock management is the primary concern. According to the 2021 National Livestock Census, 6.8 million households in Uganda have at least one type of livestock, aligning with this trend.
@@ -191,10 +191,7 @@ jupyter notebook
 ## References and Resources
 
 ### Datasets
-- Dataset Name. Source. URL not entered out of respect for Producers Direct.
-
-### Tools and Libraries
-- Library Name. Version. URL.
+- Producers Direct data. URL not entered out of respect for Producers Direct.
 
 ## Contact and Collaboration
 
@@ -213,6 +210,6 @@ jupyter notebook
 
 ---
 
-**Last Updated**: 11/21/25 
-**Status**: Needs Review
+**Last Updated**: 12/5/25
+**Status**: Needs Review / Finished 
 
