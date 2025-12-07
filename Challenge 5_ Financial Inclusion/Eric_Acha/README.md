@@ -23,7 +23,7 @@ Brief description of what you're analyzing and why it matters for Producers Dire
 5. **Step 5**: Validation and testing
 
 ### Tools and Technologies
-- **Programming Language**: Python 3.x / R
+- **Programming Language**: Python 3.x
 - **Key Libraries**: pandas, numpy, matplotlib, seaborn, scikit-learn, etc.
 - **GenAI Tools Used**: ChatGPT, GitHub Copilot, etc. (be specific about what and how)
 - **Other Tools**: Jupyter Notebook, Tableau, etc.
@@ -45,7 +45,7 @@ Brief description of what you're analyzing and why it matters for Producers Dire
 
 ## Key Findings
 
-### Finding 1: [Dispite Difference In Languages, Most Small Farmers Have Similar Needs In Africa]
+### Finding 1: [Dispite Difference In Languages, Most Small Farmers Have Similar Needs In East Africa]
 Description of the finding, supported by data and visualizations.
 
 **Implications for Producers Direct:**
