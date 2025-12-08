@@ -1,13 +1,13 @@
 # [Beatrice Liu] - [Challenge 4 - Crop Questions] Analysis -- ** incomplete **
 
 ## Overview
-Created bi-, tri-, and quad-grams and interactive visualizations for English questions by Kenyan farmers on top 5 topics -  cattle, tomato, maize, chickens, none -  to discern most common questions; these can be used by Producers Direct to create FAQ for smallholder farmers.  Sadly, I can't figure out how to imbed the interactive graphs here, but they are saved in the network_graphs folder.
+Created bi-, tri-, and quad-grams and interactive visualizations for English questions by Kenyan farmers on top 5 topics -  cattle, tomato, maize, chickens, none -  to discern most common questions; these can be used by Producers Direct to create FAQ for smallholder farmers.  Sadly, I can't figure out how to display the interactive graphs here, but they are saved in the network_graphs folder.
 
 ## Research Questions
-- Question 1: What are the most common subjects farmers are asking about?  
-- 
+- What insights can be gleaned from Crop-specific and Crop-Independent Questions?  
 
-## Methodology
+
+## Methodology: detailed explanation in the Jupyter Notebooks
 
 ### Data Sources
 - Producers Direct Dataset
@@ -23,7 +23,7 @@ Created bi-, tri-, and quad-grams and interactive visualizations for English que
 ### Output Files and Visualizations
 - Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing)
 - Note:  visualizations are uploaded to github in 'network_graphs' folder
-- n-gram frequency graphs can be found in individual notebooks; the PNG files created cropped out the text 
+- N-gram frequency graphs can be found in individual notebooks; the PNG files created cropped out the text 
 
 
 ### Tools and Technologies
@@ -43,28 +43,17 @@ Created bi-, tri-, and quad-grams and interactive visualizations for English que
 - Modified AI suggestions in the following ways: coding errors
 
 
-## Key Findings
+## Key Findings: 
 
 ### Finding 1: [Translating from Swahili is a major roadblock]
-Filtered Description of the finding, supported by data and visualizations.
+- Created bi-, tri-, grams- to cut down on # of characters that needed to be translated
+- Tri-grams from Swahili questions are similar to English ones...
+- but need *better* lemmatization, normalizing tools, Swahili corpus, and translator.  
 
-**Implications for Producers Direct:**
-- Need proper NLP to fully understand the question, e.g. argriculture corpus in Swahili, proper lemmatization,  How this finding can be used
-- What actions it suggests
 
-### Finding 2: [Most common questions]
+### Additional Findings:  Refer to 'farmers.pptx'
 Description of the finding, supported by data and visualizations.
 
-**Implications for Producers Direct:**
-- How this finding can be used
-- What actions it suggests
-
-### Finding 3: [Title]
-Description of the finding, supported by data and visualizations.
-
-**Implications for Producers Direct:**
-- How this finding can be used
-- What actions it suggests
 
 ## Visualizations
 
@@ -130,15 +119,15 @@ Bliu_analysis/
     └── ken_500trigrams_swa2eng.txt
 ```
 
-## How to Run This Analysis -- *I have no clue, did everything in Jupyter*
+### How to Run This Analysis -- *I have no clue, did everything in Jupyter*
 
 
-# Open and run notebooks in order: refer to 'Q4.Ngrams.Jupyter.Notebooks.pdf' 
+### Open and run notebooks in order: refer to 'Q4.Ngrams.Jupyter.Notebooks.pdf' 
 
 ```
 
 
-## Contact and Collaboration
+### Contact and Collaboration
 
 **Author**: [Beatrice Liu]
 **GitHub**: @bl1412
