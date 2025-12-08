@@ -1,0 +1,169 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+    <div style="text-align:center; font-family:Arial; padding-top:10px;">
+        <h1 style="margin-bottom:2px; font-size:20px;">Network Graph: Top 40 Trigrams from Kenyan Farmers Questions on Tomato in English</h1>
+        <h3 style="margin-top:0; color:#555; font-size:14px;">Word circle size = word frequency, arrow width = trigram frequency, Source: WeFarm 2022 SMS Platform</h3>
+        <hr style="width:80%; margin-top:10px; margin-bottom:15px;">
+    </div>
+    
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"borderWidth": 2, "borderWidthSelected": 4, "color": "#E6E6FA", "font": {"bold": true, "face": "arial", "size": 16}, "id": "blossom", "label": "blossom", "shape": "dot", "size": 10, "title": "blossom: 854"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#D8BFD8", "font": {"bold": true, "face": "arial", "size": 16}, "id": "end", "label": "end", "shape": "dot", "size": 10, "title": "end: 1118"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#DDA0DD", "font": {"bold": true, "face": "arial", "size": 16}, "id": "rot", "label": "rot", "shape": "dot", "size": 10, "title": "rot: 1636"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#EE82EE", "font": {"bold": true, "face": "arial", "size": 16}, "id": "tomatoes", "label": "tomatoes", "shape": "dot", "size": 49, "title": "tomatoes: 37543"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#DA70D6", "font": {"bold": true, "face": "arial", "size": 16}, "id": "take", "label": "take", "shape": "dot", "size": 10, "title": "take: 2159"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#BA55D3", "font": {"bold": true, "face": "arial", "size": 16}, "id": "flower", "label": "flower", "shape": "dot", "size": 10, "title": "flower: 2202"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9370DB", "font": {"bold": true, "face": "arial", "size": 16}, "id": "best", "label": "best", "shape": "dot", "size": 21, "title": "best: 10934"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8A2BE2", "font": {"bold": true, "face": "arial", "size": 16}, "id": "well", "label": "well", "shape": "dot", "size": 10, "title": "well: 1828"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9400D3", "font": {"bold": true, "face": "arial", "size": 16}, "id": "plant", "label": "plant", "shape": "dot", "size": 10, "title": "plant: 9688"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9932CC", "font": {"bold": true, "face": "arial", "size": 16}, "id": "rainy", "label": "rainy", "shape": "dot", "size": 10, "title": "rainy: 609"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8B008B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "use", "label": "use", "shape": "dot", "size": 10, "title": "use: 6208"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#800080", "font": {"bold": true, "face": "arial", "size": 16}, "id": "spray", "label": "spray", "shape": "dot", "size": 10, "title": "spray: 3098"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#4B0082", "font": {"bold": true, "face": "arial", "size": 16}, "id": "control", "label": "control", "shape": "dot", "size": 10, "title": "control: 4354"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6A5ACD", "font": {"bold": true, "face": "arial", "size": 16}, "id": "variety", "label": "variety", "shape": "dot", "size": 10, "title": "variety: 3839"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#483D8B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "tomato", "label": "tomato", "shape": "dot", "size": 27, "title": "tomato: 16744"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#7B68EE", "font": {"bold": true, "face": "arial", "size": 16}, "id": "seed", "label": "seed", "shape": "dot", "size": 10, "title": "seed: 3780"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#0000FF", "font": {"bold": true, "face": "arial", "size": 16}, "id": "season", "label": "season", "shape": "dot", "size": 10, "title": "season: 2670"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#0000CD", "font": {"bold": true, "face": "arial", "size": 16}, "id": "type", "label": "type", "shape": "dot", "size": 10, "title": "type: 4513"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#00008B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "long", "label": "long", "shape": "dot", "size": 10, "title": "long: 1845"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#000080", "font": {"bold": true, "face": "arial", "size": 16}, "id": "blight", "label": "blight", "shape": "dot", "size": 10, "title": "blight: 2135"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#E6E6FA", "font": {"bold": true, "face": "arial", "size": 16}, "id": "farm", "label": "farm", "shape": "dot", "size": 10, "title": "farm: 2937"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#D8BFD8", "font": {"bold": true, "face": "arial", "size": 16}, "id": "want", "label": "want", "shape": "dot", "size": 10, "title": "want: 1474"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#DDA0DD", "font": {"bold": true, "face": "arial", "size": 16}, "id": "cause", "label": "cause", "shape": "dot", "size": 10, "title": "cause: 2221"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#EE82EE", "font": {"bold": true, "face": "arial", "size": 16}, "id": "chemical", "label": "chemical", "shape": "dot", "size": 10, "title": "chemical: 2664"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#DA70D6", "font": {"bold": true, "face": "arial", "size": 16}, "id": "top", "label": "top", "shape": "dot", "size": 10, "title": "top: 499"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#BA55D3", "font": {"bold": true, "face": "arial", "size": 16}, "id": "dress", "label": "dress", "shape": "dot", "size": 10, "title": "dress: 393"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9370DB", "font": {"bold": true, "face": "arial", "size": 16}, "id": "stage", "label": "stage", "shape": "dot", "size": 10, "title": "stage: 1323"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8A2BE2", "font": {"bold": true, "face": "arial", "size": 16}, "id": "time", "label": "time", "shape": "dot", "size": 10, "title": "time: 1649"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9400D3", "font": {"bold": true, "face": "arial", "size": 16}, "id": "white", "label": "white", "shape": "dot", "size": 10, "title": "white: 499"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9932CC", "font": {"bold": true, "face": "arial", "size": 16}, "id": "bacterial", "label": "bacterial", "shape": "dot", "size": 10, "title": "bacterial: 506"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8B008B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "wilt", "label": "wilt", "shape": "dot", "size": 10, "title": "wilt: 1730"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#800080", "font": {"bold": true, "face": "arial", "size": 16}, "id": "fly", "label": "fly", "shape": "dot", "size": 10, "title": "fly: 426"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#4B0082", "font": {"bold": true, "face": "arial", "size": 16}, "id": "black", "label": "black", "shape": "dot", "size": 10, "title": "black: 1338"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6A5ACD", "font": {"bold": true, "face": "arial", "size": 16}, "id": "spot", "label": "spot", "shape": "dot", "size": 10, "title": "spot: 917"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#483D8B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "late", "label": "late", "shape": "dot", "size": 10, "title": "late: 417"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#7B68EE", "font": {"bold": true, "face": "arial", "size": 16}, "id": "tuta", "label": "tuta", "shape": "dot", "size": 10, "title": "tuta: 452"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#0000FF", "font": {"bold": true, "face": "arial", "size": 16}, "id": "absoluta", "label": "absoluta", "shape": "dot", "size": 10, "title": "absoluta: 324"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#0000CD", "font": {"bold": true, "face": "arial", "size": 16}, "id": "good", "label": "good", "shape": "dot", "size": 10, "title": "good: 2636"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#00008B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "start", "label": "start", "shape": "dot", "size": 10, "title": "start: 1692"}]);
+                  edges = new vis.DataSet([{"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "blossom", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 172", "to": "end", "value": 172, "width": 1.9163636363636365}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "end", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 530", "to": "rot", "value": 530, "width": 6.472727272727273}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "rot", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 530", "to": "tomatoes", "value": 530, "width": 6.472727272727273}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomatoes", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 350", "to": "take", "value": 350, "width": 4.181818181818182}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomatoes", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 187", "to": "flower", "value": 187, "width": 2.1072727272727274}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomatoes", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 158", "to": "best", "value": 158, "width": 1.7381818181818183}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomatoes", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 127", "to": "well", "value": 127, "width": 1.3436363636363637}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomatoes", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 131", "to": "plant", "value": 131, "width": 1.3945454545454545}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomatoes", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 129", "to": "rainy", "value": 129, "width": 1.3690909090909091}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "use", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 195", "to": "spray", "value": 195, "width": 2.209090909090909}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "use", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 169", "to": "control", "value": 169, "width": 1.8781818181818182}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "use", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 138", "to": "plant", "value": 138, "width": 1.4836363636363636}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "spray", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 452", "to": "tomatoes", "value": 452, "width": 5.48}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 176", "to": "variety", "value": 176, "width": 1.9672727272727273}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 268", "to": "tomato", "value": 268, "width": 3.138181818181818}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 170", "to": "seed", "value": 170, "width": 1.8909090909090909}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 162", "to": "plant", "value": 162, "width": 1.789090909090909}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 158", "to": "season", "value": 158, "width": 1.7381818181818183}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 143", "to": "type", "value": 143, "width": 1.5472727272727274}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "variety", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 158", "to": "tomatoes", "value": 158, "width": 1.7381818181818183}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "variety", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 176", "to": "tomato", "value": 176, "width": 1.9672727272727273}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "long", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 350", "to": "tomatoes", "value": 350, "width": 4.181818181818182}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomato", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 297", "to": "variety", "value": 297, "width": 3.507272727272727}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomato", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 206", "to": "seed", "value": 206, "width": 2.349090909090909}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomato", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 158", "to": "blight", "value": 158, "width": 1.7381818181818183}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tomato", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 127", "to": "farm", "value": 127, "width": 1.3436363636363637}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "seed", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 170", "to": "tomatoes", "value": 170, "width": 1.8909090909090909}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "want", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 236", "to": "plant", "value": 236, "width": 2.730909090909091}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "plant", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 138", "to": "tomatoes", "value": 138, "width": 1.4836363636363636}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "season", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 158", "to": "plant", "value": 158, "width": 1.7381818181818183}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "type", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 206", "to": "tomato", "value": 206, "width": 2.349090909090909}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "type", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 127", "to": "tomatoes", "value": 127, "width": 1.3436363636363637}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "cause", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 198", "to": "blossom", "value": 198, "width": 2.247272727272727}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "chemical", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 169", "to": "use", "value": 169, "width": 1.8781818181818182}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "top", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 191", "to": "dress", "value": 191, "width": 2.158181818181818}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "dress", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 191", "to": "tomatoes", "value": 191, "width": 2.158181818181818}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "flower", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 187", "to": "stage", "value": 187, "width": 2.1072727272727274}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "time", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 181", "to": "plant", "value": 181, "width": 2.030909090909091}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "control", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 178", "to": "blight", "value": 178, "width": 1.9927272727272727}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "control", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 172", "to": "blossom", "value": 172, "width": 1.9163636363636365}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "control", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 158", "to": "tomato", "value": 158, "width": 1.7381818181818183}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "control", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 127", "to": "white", "value": 127, "width": 1.3436363636363637}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "blight", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 157", "to": "tomatoes", "value": 157, "width": 1.7254545454545456}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "bacterial", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 174", "to": "wilt", "value": 174, "width": 1.9418181818181819}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "wilt", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 174", "to": "tomatoes", "value": 174, "width": 1.9418181818181819}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "white", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 127", "to": "fly", "value": 127, "width": 1.3436363636363637}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "fly", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 164", "to": "tomatoes", "value": 164, "width": 1.8145454545454545}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "black", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 157", "to": "spot", "value": 157, "width": 1.7254545454545456}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "spot", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 157", "to": "tomatoes", "value": 157, "width": 1.7254545454545456}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "late", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 157", "to": "blight", "value": 157, "width": 1.7254545454545456}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "tuta", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 155", "to": "absoluta", "value": 155, "width": 1.7000000000000002}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "absoluta", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 155", "to": "tomatoes", "value": 155, "width": 1.7000000000000002}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "good", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 152", "to": "plant", "value": 152, "width": 1.6618181818181819}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "rainy", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 129", "to": "season", "value": 129, "width": 1.3690909090909091}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.6}}, "color": {"color": "#848484", "opacity": 0.5}, "from": "start", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 127", "to": "tomato", "value": 127, "width": 1.3436363636363637}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -2000,
+            "springConstant": 0.001,
+            "springLength": 150
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
