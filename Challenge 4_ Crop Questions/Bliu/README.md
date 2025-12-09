@@ -1,11 +1,11 @@
 # Beatrice Liu: Challenge 4 - Crop Questions Analysis 
 
 ## Overview
-Conducted word frequency analysis on uestions by Kenyan Farmers in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quad-grams on top 5 topics -  cattle, tomato, maize, chickens, none -  to identify patterns and relationships and communicate insights concisely. Note:  I can't figure out how to display the interactive graphs here, but they are saved in the network_graphs folder.
+Conducted word frequency analysis on uestions by Kenyan Farmers in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quad-grams on top 5 topics -  cattle, tomato, maize, chickens, none -  to identify patterns and relationships and communicate insights concisely. Note:  I can't figure out how to display the interactive graphs here; they are saved in the network_graphs folder.
 
 See 'farmers.bliu.pdf' for summary of findings
 
-## Research Questions
+## Research Question
 - What insights can be gleaned from Crop-specific and Crop-Independent Questions?  
 
 
@@ -16,13 +16,13 @@ See 'farmers.bliu.pdf' for summary of findings
 - Swahili [stopword](https://data.mendeley.com/datasets/mmf4hnsm2n/1) and [verb conjugation](https://data.mendeley.com/datasets/rvt89578g5/1) files  
 
 ### Approach: *Notebook overviews describe steps in greater detail - see 'Q4.Ngrams.Jupyter.Notebooks.pdf' for list of notebooks and their running order*
-1. **Data loading and initial exploration**
-2. **Data cleaning and preprocessing**
-3. **Data segmentation into smaller datasets for analyses: unique questions asked by farmers in 4 countries**
-4. **Filtered dataset for questions by Kenyan farmers**
-5. **NLP - remove punctuation marks, lowercas, tokenize using custom list of stopwords and lemma dictionaries**
-6. **Count word occurance in list of words created in Step 5**
-7. **Generate list of tuples for more frequent words for visualization and interpretation**
+1. Data loading and initial exploration
+2. Data cleaning and preprocessing
+3. Data segmentation into smaller datasets for analyses: unique questions asked by farmers in 4 countries
+4. Filtered dataset for questions by Kenyan farmers
+5. NLP - remove punctuation marks, lowercas, tokenize using custom list of stopwords and lemma dictionaries
+6. Count word occurances in list of words created in Step 5
+7. Generate list of tuples for more frequent words for visualization and interpretation
 
 
 ### Output Files and Visualizations
@@ -51,13 +51,15 @@ See 'farmers.bliu.pdf' for summary of findings
 
 
 ### Finding: Translating from Swahili is a **major** roadblock
-- Created bi- and tri-grams in Swahili to reduce # of characters that needed to be translated
-- Tri-grams from Swahili questions are similar to English ones...
-- but need *better* lemmatization, normalizing tools, Swahili corpus, and translator.  
+- Swahili is an under-resourced language in Natural Language Processing
+- Commonly used Python packages such as SpaCy, NLTK, or Gensim do not have inherent Swahili support
+- It is an agglutinative language:  prefixes, roots, and suffixes are combined into one word.  It also has complex noun class structures, that affect verb agreement.  These can lead to ineffective lemmatization.
+- A robust analysis requires an agricultural corpus on rural farming in Africa, and custom lists of words and lemma dictionary.   
 
 
 ### Additional Findings:  *Refer to 'farmers.bliu.pdf'*
-
+- With These Challenges, Swahili Trigrams Translated in English – All Topics –  Were More Informative Than Bi- or Quadgrams.
+- 
 ## Visualizations: *see file list below* 
 
 
