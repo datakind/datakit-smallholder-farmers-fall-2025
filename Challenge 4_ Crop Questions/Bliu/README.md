@@ -66,9 +66,11 @@ See *'farmers.bliu.pdf'* for summary of findings
 - Tomato Farmers Asked About Planting, Best Seeds,  and Keeping Tomatoes Disease-Free
 
 
-## Visualizations: *see file list below* 
+## Static Network Visualizations: *see file list below for interactive graphs* 
 ![Tri-Grams Network Graph](top30trigrams_ken_eng_Notopic_network.png)
 ![Bi-Grams Network Graph](top40bigrams_ken_eng_Notopic_network.png)
+![2nd Bi-Grams Network Graph](top40bigrams_ken_eng_network.png)
+![2nd Tri-Grams Network Graph](top40trigrams_ken_eng_network.png)
 
 ## Limitations and Challenges
 
