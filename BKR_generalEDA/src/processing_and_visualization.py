@@ -6,6 +6,9 @@ import duckdb
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
+from IPython.display import HTML
+import io
+import sys
 # -------------------------------------------------------------------
 # Quick save various files in data directory if they do not already exist
 # -------------------------------------------------------------------
@@ -326,3 +329,39 @@ def plot_umap_centroids(df, cluster_col='cluster', meta_col='meta_label', title_
     )
 
     fig.show()
+
+
+# -------------------------------------------------------------------
+#  Wrapper function to make scrollable output display on GitHub
+# -------------------------------------------------------------------
+
+
+def collapsible_preview(func, *args, summary_label="Show output", max_height="400px", **kwargs):
+    """
+    Runs a function that prints output, captures the printed text,
+    and displays it in a collapsible, scrollable block.
+    
+    Returns whatever the function normally returns (e.g. a DataFrame).
+    """
+    
+    # Capture printed output
+    buffer = io.StringIO()
+    stdout_original = sys.stdout
+    sys.stdout = buffer
+    
+    result = func(*args, **kwargs)
+    
+    sys.stdout = stdout_original
+    preview_text = buffer.getvalue()
+
+    # Collapsible + scrollable block
+    display(HTML(f"""
+    <details>
+      <summary>{summary_label}</summary>
+      <div style="max-height: {max_height}; overflow-y: auto; border: 1px solid #ccc; padding: 8px;">
+        <pre>{preview_text}</pre>
+      </div>
+    </details>
+    """))
+    
+    return result
