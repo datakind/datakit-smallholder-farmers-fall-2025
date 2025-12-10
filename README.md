@@ -1,51 +1,88 @@
-# datakit-smallholder-farmers-fall-2025
+# Clustering of 2.7 Million Farmer Queries and Analysing 73 years of Ugandan Weather Patterns
 
-## What's a DataKit?
-_A DataKit™ is a work-ready set of data, software, and innovation questions, curated by DataKind, in a domain of social good. As you engage with a DataKit, you will apply your skills for social impact while deepening your understanding of problems common in the space. All learnings, ideas, and insights resulting from this DataKit will be aggregated and used by DataKind to expand our impact in the financial inclusion and economic opportunity sector. Specifically, we aim to leverage your insights and prototype solutions to expand on our product offerings, supporting stakeholders to expand their reach and impact. Learnings will be shared throughout the DataKit and beyond._ 
+### Uncovering Agricultural Trends in East Africa using NLP & Unsupervised Learning
 
-# Problem to tackle
-Producers Direct acquired all data, technologies, and data science initiatives from WeFarm when the latter went bankrupt in late 2022. WeFarm operated for approximately 7 years as an SMS platform, enabling smallholder farmers in East Africa to share agricultural knowledge and receive peer-to-peer advice. During this time, WeFarm accumulated a substantial dataset consisting of:
-- 7.6M+ questions asked across four languages (English, Swahili, Luganda, and Nyn)
-- 17.2M+ responses to these questions
-- Nearly 200,000 farming tips shared on the platform
-- Quality ratings for approximately 20% of the responses
-- Basic demographic and farming information on platform users
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Scikit-Learn](https://img.shields.io/badge/Library-Scikit--Learn-orange)
+![Plotly](https://img.shields.io/badge/Library-Plotly-green)
 
-This rich dataset could yield valuable insights to support on-farm management of smallholder farmers and help improve farm productivity and increase household incomes. 
+## Project Overview
+This project analyses a massive dataset of **11 million farmer queries** from Producers Direct to understand the critical challenges faced by smallholder farmers in Kenya, Uganda, and Tanzania.
 
-However, Producers Direct needs analytical expertise to extract meaningful patterns and actionable information from this data. The organization is interested in exploring several key areas as noted below.
+By filtering for the **2.7 million English-language queries**, this analysis uses Unsupervised Machine Learning to categorise unstructured text into actionable topics. The goal was to move beyond simple keyword counting to discover semantic themes and map them against seasonal, and geographical climate trends. 
 
-# Submitting your work 
-Every bit of information you contribute is a chance for our partner, Producers Direct, to better understand the challenges and opportunities smallhold farmers face in sub-Saharan Africa and Latin America through a data-driven lens.  
+The project further cross-references these linguistic trends with **historical climate data (1950–2023)** from the Climate Change Knowledge Portal to validate how rainfall variability impacts farming behavior.
 
-***We want to see it all! Everything will help–not just right answers, but wrong answers and works in progress too.***
+**Key Challenge:** The dataset size required memory-efficient streaming techniques (MiniBatch K-Means) to process millions of rows on local hardware.
 
-## Use of Generative AI during the Event
+---
 
-Generative AI tools (such as ChatGPT, GitHub Copilot, or similar) may be used throughout the DataKit event to assist with tasks such as code generation, data visualization, or documentation. We encourage participants to use these tools strategically and responsibly as partners in exploration and analysis, not as replacements for critical thinking.. The goal is to use GenAI strategically to enhance creativity, collaboration, and efficiency, while ensuring that all final analyses and insights reflect human judgment, transparency and ethical data practices. 
+## Methodology & Technical Architecture
 
-## GitHub Guidelines
-To contribute to a challenge, please add your work to the appropriate challenge sub-folder in the GitHub repository.
-1. Fork this repository to your own GitHub account.
-2. Add your files locally under `challenge_X_title/<your-name-or-analysis-title>/`
-3. Include your analysis, code, and results.
-4. Commit and push your changes to your fork.
-5. Open a Pull Request back to this repository.
-Be sure to include a short `README.md` in your submission folder describing your approach, key results, and any dependencies.
+### 1. Data Standardisation & Preparation 
+* **Strategic Subsetting for NLP:** Initiated the analysis by isolating **2.7 million unique English queries** from the 11M-row multilingual compilation. This action ensured a semantically consistent body, critical for successful topic modeling.
+* **Time-Series Robustness:** Developed and implemented a robust parsing solution for the timestamp data, handling noisy, microsecond-level ISO8601 formats. This standardisation directly enabled the seasonal trend analysis.
+* **Geographic Data Cleaning:** Explicitly noted the dominance of English queries from Kenya and Uganda, framing the absence of Tanzanian English data as a crucial geolinguistic finding.
 
-# The Project Brief 
-The project brief to guide you for this DataKit event can be found [here](https://docs.google.com/document/d/1jKTmb8R5GlM9uqQkB5fXd37o2bdX17JKB36mK-NqWFE/edit?tab=t.0). 
+### 2. Feature Extraction 
+* **Algorithm:** `HashingVectorizer` (Scikit-Learn) with Character N-grams (`3, 5`).
+* **Impact:** Created a robust feature set that automatically clusters misspelled words (e.g., "maize", "maiz") together, effectively handling dirty user-generated text.
 
-***N.B.*** Please do not upload the challenge dataset to public dataset repositories such as Kaggle or share the data via public Google Drive or Dropbox links. 
+### 3. Clustering (Streaming Approach)
+* **Algorithm:** `MiniBatchKMeans` (K=50 clusters).
+* **Strategy:** **Partial Fit** (incremental learning) on batches of 10,000 rows to overcome RAM limitations.
+* **Interpretation:** Manually mapped cluster centroids to meaningful labels (e.g., Cluster 12 → "Disease Control") to create a verified, actionable taxonomy.
 
-_While we recognize this may facilitate collaboration with other volunteers, our partners at Producers Direct are looking to develop the legal, governance, and technical infrastructure for their global cooperative. This will focus on allowing farmers to retain control of their data, but allow third parties access to the data in specific circumstances._
+### 4. Visualisation
+* **Dimensionality Reduction:** `TruncatedSVD` (Latent Semantic Analysis) reduced the feature space to 2D for plotting.
+* **Tools:** `Matplotlib` for static plots and `Plotly` for interactive, hover-based topic exploration.
+  
+---
+
+## Key Findings
+
+### 1. Climate Vulnerability & Topic Synergy
+This analysis cross-referenced farmer queries with rainfall/temperature data (1950-2023):
+* **Quantified Rainfall Decline:** Climate data validated a **statistically significant decline** in rainfall during Uganda's critical March–May planting season (average reduction of **12.33 mm per decade**, Mann-Kendall $p=0.01$).
+* **Flood Risk:** The analysis revealed that despite the overall decline, the onset of the rainy season is marked by short, **intense rainfall events**, increasing flood risks in mountainous areas (e.g., Mt. Elgon).
+* **Warming Trend:** Uganda's mean surface air temperatures have risen from **21°C (1950s) to over 24°C (2020s)**.
 
 
-# How to contribute: Challenges
-- [Prep Challenge: Bridging Languages — Translating Farmer Conversations](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Prep%20Challenge-%20Translation>)
-- [Challenge 1: Identifying patterns in weather and agriculture](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%201%20_Weather%20Patterns>)
-- [Challenge 2: Seasonality](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%202_Seasonality>)
-- [Challenge 3: Identifying Community Leaders](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%203_Community%20Leaders>). 
-- [Challenge 4: Crop-Specific vs. Crop-Independent Questions](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%204_%20Crop%20Questions>)
-- [Challenge 5: Beyond Farming — Financial Inclusion and Livelihood](<https://github.com/datakind/datakit-smallholder-farmers-fall-2025/tree/main/Challenge%205_%20Financial%20Inclusion>)
 
+### 2. Topic Dominance & Gaps
+* **Staple Focus:** "Maize" (2.2M records) and "Beans" (732k records) remain the most discussed crops, indicating a prioritisation of core farming activities.
+* **Reactive Health:** High volume of queries regarding specific livestock symptoms (e.g., "bleeding," "pus") highlights a need for preventative, rather than reactive, animal health advisory services.
+* **Niche Gaps:** Topics like "Beekeeping" and "Passionfruit" generated low volume, suggesting specialised advisory services are needed for these complex, niche categories.
+* **Livestock:** High engagement on "Cattle" and "Chicken." Notably, there is specific, high-value interest in "Kienyeji Chicken" (16k+ queries), a local breed, despite it being a niche topic.
+
+### 3. Geographic & Linguistic Constraints
+* **English Dominance:** Kenya and Uganda accounted for 99.9% of English queries. Tanzania's interaction was almost exclusively in Swahili, confirming a significant geolinguistic bias in the English subset and necessitating future multi-lingual NLP work..
+* **Gender Gap:** Male farmers submitted ~113k queries compared to ~30k from female farmers, highlighting a digital gender divide.
+
+### 4. Seasonal Behavioral Trends
+* **Crop Cycle:** Crop-related queries peak between **June and September**, with the highest volume in **August**. This correlates with the end of the harvest season, where farmers pivot to inquiries about "Yield Optimisation" for the next cycle.
+* **Livestock Consistency:** Unlike crops, animal health queries (disease control, medicine) remain consistent year-round, reflecting the non-seasonal nature of animal rearing.
+  
+## How to Run
+1.  Clone the repository.
+2.  Install dependencies:
+    ```bash
+    pip install pandas numpy scikit-learn matplotlib plotly pyarrow openpyxl
+    ```
+    **Challenge 4**
+3.  Run the Jupyter Notebook `Question Topic.ipynb`.
+4.  View the file `Cluster Summary.xlsx`
+
+    **Challenge 1**
+6.  Run the Jupyter Notebook `Weather Patterns.ipynb`
+---
+
+## Gen-AI Disclosure
+* **Gemini:** Used for optimising `MiniBatchKMeans` code for large-scale datasets.
+* **Copilot:** Assisted in structuring the final analytical report.
+---
+
+
+## Author
+**Jonathan Khabusi**
+*Climate Data Analyst*
