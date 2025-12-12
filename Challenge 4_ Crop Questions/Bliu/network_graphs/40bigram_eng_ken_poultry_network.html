@@ -1,0 +1,169 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+    <div style="text-align:center; font-family:Arial; padding-top:10px;">
+        <h1 style="margin-bottom:2px; font-size:20px;">Network Graph: Top 40 Bigrams from Kenyan Farmer Questions on Poultry on English</h1>
+        <h3 style="margin-top:0; color:#555; font-size:14px;">Word circle size = word frequency, arrow width = bigram frequency, Source: WeFarm 2022 SMS Platform</h3>
+        <hr style="width:80%; margin-top:10px; margin-bottom:15px;">
+    </div>
+    
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"borderWidth": 2, "borderWidthSelected": 4, "color": "#7D9D9C", "font": {"bold": true, "face": "arial", "size": 16}, "id": "lay", "label": "lay", "shape": "dot", "size": 24, "title": "lay: 15098"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#576F72", "font": {"bold": true, "face": "arial", "size": 16}, "id": "egg", "label": "egg", "shape": "dot", "size": 31, "title": "egg: 22998"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8B9A46", "font": {"bold": true, "face": "arial", "size": 16}, "id": "poultry", "label": "poultry", "shape": "dot", "size": 37, "title": "poultry: 29837"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#A4BE7B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "farm", "label": "farm", "shape": "dot", "size": 18, "title": "farm: 8688"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#5F7161", "font": {"bold": true, "face": "arial", "size": 16}, "id": "keep", "label": "keep", "shape": "dot", "size": 20, "title": "keep: 11304"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6D8B74", "font": {"bold": true, "face": "arial", "size": 16}, "id": "house", "label": "house", "shape": "dot", "size": 13, "title": "house: 4262"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#94B49F", "font": {"bold": true, "face": "arial", "size": 16}, "id": "follow", "label": "follow", "shape": "dot", "size": 14, "title": "follow: 4989"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#B4CFB0", "font": {"bold": true, "face": "arial", "size": 16}, "id": "response", "label": "response", "shape": "dot", "size": 14, "title": "response: 4369"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9CB4CC", "font": {"bold": true, "face": "arial", "size": 16}, "id": "old", "label": "old", "shape": "dot", "size": 19, "title": "old: 9694"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#748DA6", "font": {"bold": true, "face": "arial", "size": 16}, "id": "chick", "label": "chick", "shape": "dot", "size": 61, "title": "chick: 55235"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6096B4", "font": {"bold": true, "face": "arial", "size": 16}, "id": "die", "label": "die", "shape": "dot", "size": 15, "title": "die: 6213"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#93BFCF", "font": {"bold": true, "face": "arial", "size": 16}, "id": "one", "label": "one", "shape": "dot", "size": 22, "title": "one: 13466"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#BDCDD6", "font": {"bold": true, "face": "arial", "size": 16}, "id": "improve", "label": "improve", "shape": "dot", "size": 16, "title": "improve: 7126"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9F73AB", "font": {"bold": true, "face": "arial", "size": 16}, "id": "kienyeji", "label": "kienyeji", "shape": "dot", "size": 26, "title": "kienyeji: 17531"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#A084DC", "font": {"bold": true, "face": "arial", "size": 16}, "id": "chicken", "label": "chicken", "shape": "dot", "size": 59, "title": "chicken: 53037"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#7D9D9C", "font": {"bold": true, "face": "arial", "size": 16}, "id": "hen", "label": "hen", "shape": "dot", "size": 46, "title": "hen: 39095"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#576F72", "font": {"bold": true, "face": "arial", "size": 16}, "id": "start", "label": "start", "shape": "dot", "size": 24, "title": "start: 16056"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8B9A46", "font": {"bold": true, "face": "arial", "size": 16}, "id": "day", "label": "day", "shape": "dot", "size": 19, "title": "day: 10263"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#A4BE7B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "want", "label": "want", "shape": "dot", "size": 18, "title": "want: 8841"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#5F7161", "font": {"bold": true, "face": "arial", "size": 16}, "id": "give", "label": "give", "shape": "dot", "size": 25, "title": "give: 17115"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6D8B74", "font": {"bold": true, "face": "arial", "size": 16}, "id": "month", "label": "month", "shape": "dot", "size": 16, "title": "month: 6803"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#94B49F", "font": {"bold": true, "face": "arial", "size": 16}, "id": "medicine", "label": "medicine", "shape": "dot", "size": 19, "title": "medicine: 9771"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#B4CFB0", "font": {"bold": true, "face": "arial", "size": 16}, "id": "use", "label": "use", "shape": "dot", "size": 21, "title": "use: 11836"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9CB4CC", "font": {"bold": true, "face": "arial", "size": 16}, "id": "treat", "label": "treat", "shape": "dot", "size": 14, "title": "treat: 4646"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#748DA6", "font": {"bold": true, "face": "arial", "size": 16}, "id": "week", "label": "week", "shape": "dot", "size": 15, "title": "week: 6344"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6096B4", "font": {"bold": true, "face": "arial", "size": 16}, "id": "many", "label": "many", "shape": "dot", "size": 18, "title": "many: 9037"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#93BFCF", "font": {"bold": true, "face": "arial", "size": 16}, "id": "eat", "label": "eat", "shape": "dot", "size": 13, "title": "eat: 4204"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#BDCDD6", "font": {"bold": true, "face": "arial", "size": 16}, "id": "young", "label": "young", "shape": "dot", "size": 12, "title": "young: 2567"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#9F73AB", "font": {"bold": true, "face": "arial", "size": 16}, "id": "best", "label": "best", "shape": "dot", "size": 24, "title": "best: 15633"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#A084DC", "font": {"bold": true, "face": "arial", "size": 16}, "id": "feed", "label": "feed", "shape": "dot", "size": 21, "title": "feed: 12334"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#7D9D9C", "font": {"bold": true, "face": "arial", "size": 16}, "id": "vaccine", "label": "vaccine", "shape": "dot", "size": 15, "title": "vaccine: 5548"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#576F72", "font": {"bold": true, "face": "arial", "size": 16}, "id": "could", "label": "could", "shape": "dot", "size": 12, "title": "could: 3108"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8B9A46", "font": {"bold": true, "face": "arial", "size": 16}, "id": "problem", "label": "problem", "shape": "dot", "size": 16, "title": "problem: 7388"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#A4BE7B", "font": {"bold": true, "face": "arial", "size": 16}, "id": "would", "label": "would", "shape": "dot", "size": 12, "title": "would: 2781"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#5F7161", "font": {"bold": true, "face": "arial", "size": 16}, "id": "like", "label": "like", "shape": "dot", "size": 13, "title": "like: 4050"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#6D8B74", "font": {"bold": true, "face": "arial", "size": 16}, "id": "need", "label": "need", "shape": "dot", "size": 16, "title": "need: 7261"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": {"opacity": 0.5}, "from": "lay", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 5748", "to": "egg", "value": 5748, "width": 8.152786885245902}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "poultry", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 5110", "to": "farm", "value": 5110, "width": 7.211475409836066}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "poultry", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1914", "to": "keep", "value": 1914, "width": 2.4960655737704918}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "poultry", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1400", "to": "house", "value": 1400, "width": 1.7377049180327868}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "follow", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 4296", "to": "response", "value": 4296, "width": 6.010491803278688}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "old", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 4275", "to": "chick", "value": 4275, "width": 5.979508196721311}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "chick", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1855", "to": "die", "value": 1855, "width": 2.4090163934426227}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "chick", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1251", "to": "one", "value": 1251, "width": 1.5178688524590163}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "improve", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 4053", "to": "kienyeji", "value": 4053, "width": 5.651967213114753}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "kienyeji", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 3600", "to": "chicken", "value": 3600, "width": 4.983606557377049}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "kienyeji", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2981", "to": "chick", "value": 2981, "width": 4.070327868852459}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "kienyeji", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1343", "to": "hen", "value": 1343, "width": 1.653606557377049}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "start", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 3800", "to": "poultry", "value": 3800, "width": 5.278688524590164}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "start", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1178", "to": "keep", "value": 1178, "width": 1.4101639344262296}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "start", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1140", "to": "lay", "value": 1140, "width": 1.3540983606557377}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "chicken", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1695", "to": "lay", "value": 1695, "width": 2.172950819672131}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "day", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 3390", "to": "old", "value": 3390, "width": 4.673770491803278}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "want", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 3177", "to": "start", "value": 3177, "width": 4.359508196721311}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "give", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2966", "to": "chick", "value": 2966, "width": 4.048196721311475}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "give", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1833", "to": "chicken", "value": 1833, "width": 2.3765573770491804}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "give", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1643", "to": "hen", "value": 1643, "width": 2.0962295081967213}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "month", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2365", "to": "old", "value": 2365, "width": 3.161475409836066}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "medicine", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2236", "to": "use", "value": 2236, "width": 2.9711475409836066}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "medicine", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1943", "to": "give", "value": 1943, "width": 2.5388524590163932}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "use", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1255", "to": "treat", "value": 1255, "width": 1.5237704918032786}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "one", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2203", "to": "day", "value": 2203, "width": 2.9224590163934425}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "one", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1397", "to": "week", "value": 1397, "width": 1.73327868852459}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "one", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1225", "to": "month", "value": 1225, "width": 1.4795081967213115}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "week", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2011", "to": "old", "value": 2011, "width": 2.6391803278688526}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "many", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 2010", "to": "egg", "value": 2010, "width": 2.637704918032787}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "keep", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1587", "to": "chicken", "value": 1587, "width": 2.013606557377049}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "eat", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1693", "to": "egg", "value": 1693, "width": 2.17}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "young", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1441", "to": "chick", "value": 1441, "width": 1.7981967213114753}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1415", "to": "feed", "value": 1415, "width": 1.7598360655737706}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "best", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1414", "to": "medicine", "value": 1414, "width": 1.758360655737705}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "feed", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1394", "to": "chick", "value": 1394, "width": 1.7288524590163934}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "vaccine", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1322", "to": "give", "value": 1322, "width": 1.6226229508196721}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "could", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1313", "to": "problem", "value": 1313, "width": 1.609344262295082}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "would", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1280", "to": "like", "value": 1280, "width": 1.5606557377049182}, {"arrows": "to", "color": {"opacity": 0.5}, "from": "need", "smooth": {"roundness": 0.2, "type": "curvedCW"}, "title": "Frequency: 1247", "to": "start", "value": 1247, "width": 1.5119672131147541}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -2000,
+            "springConstant": 0.001,
+            "springLength": 150
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
