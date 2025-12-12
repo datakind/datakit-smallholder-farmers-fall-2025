@@ -1,8 +1,14 @@
 ## Beatrice Liu: Challenge 4 - Crop Questions Analysis 
 
 ## Overview
-Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quad-grams on top 5 topics -  cattle, tomato, maize, chickens, none -  to identify patterns and relationships and communicate insights concisely. Note:  I can't figure out how to display the interactive graphs here; they are saved in the network_graphs folder.
+Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quadgrams on top 5 topics -  cattle, tomato, maize, poultry, chickens (grouped with poultry).  
 
+Identifying the top n-grams could facilitate:
+* Information retrieval:  provide links using search terms comprised of the most frequent trigrams or quadgrams
+* Content generation:
+    1. Create a FAQ page that covers the most frequent tri- or quadgrams
+    2. Create educational videos on the top question topics with content that covers the top tri- or quadgrams of the questions.  Audio could be in Swahili with English subtitles or vice versa.
+  
 See *'farmers.bliu.pdf'* for summary of findings
 
 ## Research Question
@@ -26,20 +32,20 @@ See *'farmers.bliu.pdf'* for summary of findings
 
 
 ### Output Files and Visualizations
-- Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing)
+- Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing), which can only be accessed with the link
 - Note:  visualizations are uploaded to github in 'network_graphs' folder
-- N-gram frequency graphs can be found in individual notebooks *(the PNG files cropped out the n-gram text)*
+- N-gram frequency graphs 
 
 
 ### Tools and Technologies
 - **Programming Language**: Python 3.13.5 
-- **Key Libraries**: pandas, numpy, matplotlib, nltk, deep-language... - full list is in the notebooks
+- **Key Libraries**: pandas, numpy, matplotlib, nltk, deep-language, pyvis... - full list is in the notebooks
 - **GenAI Tools Used**: ChatGPT, Anaconda Toolbox
 - **Other Tools**: Jupyter Notebook
 
 
 ### Tools Used
-- **ChatGPT**: Used for generating code for natural language processing functions in English, translating Swahili tokens into English
+- **ChatGPT**: Used for generating code for natural language processing functions in English and translating Swahili tokens into English
 - **Anaconda Toolbox**: Used for generating interactive network graphs
 
 ### Human Review Process
@@ -53,24 +59,26 @@ See *'farmers.bliu.pdf'* for summary of findings
 ### Finding: Translating from Swahili is a **major** roadblock
 - Swahili is an under-resourced language in Natural Language Processing
 - Commonly used Python packages such as SpaCy, NLTK, or Gensim do not have inherent Swahili support
-- It is an agglutinative language:  prefixes, roots, and suffixes are combined into one word.  It also has complex noun class structures, that affect verb agreement.  These can lead to ineffective lemmatization.
+- Swahili is an agglutinative language:  prefixes, roots, and suffixes are combined into one word.  It also has complex noun class structures, that affect verb agreement.  These can lead to ineffective lemmatization.
 - Accurate translations require an agricultural corpus on rural farming in Africa, and custom lists of words and lemma dictionary.   
 
 
 ### Additional Findings:  *Refer to 'farmers.bliu.pdf'*
 - With These Challenges, Swahili Trigrams Translated in English – All Topics –  Were More Informative Than Bi- or Quadgrams
-- Tri-grams of English Questions Without a Topic Still Focused on Farming:  e.g. Best Practices on Birthing Calves, Planting Maize and Starting a Poultry Farm
-- Cattle Farmers in Kenya Focused on Giving Birth, Milk Production, and Health
-- Chicken Farmers in Kenya Asked About Young Chicks, Laying Eggs, and Medicines
-- Maize Farmers in Kenya Asked About the Best Fertilizer and Weed Control, Best Seeds and Planting
-- Tomato Farmers in Kenya Asked About Planting, Best Seeds, and Keeping Tomatoes Disease-Free
+- Out of 5 Million Trigrams, Farmers Most Frequently Asked About Birthing Calves, Starting Poultry Farms, Using Treatments / Chemicals, and Maize Seeds
+- Cattle Kenyan Farmers Focused on Giving Birth, Milk Production, and Caring for Cows
+- Kenyan Poultry Farmers Asked How to Start a Poultry Farms, Young Chicks, and Lay Eggs
+- Maize Farmers in Kenya Asked About the Best Seeds, Best Fertilizer, Weed and Worm Control
+- Tomato Kenyan Farmers Asked About Best Time to Plant, Blossom-End Rot, and Best Tomato Varieties
 
 
-## Static Network Visualizations: *see file list below for interactive graphs* 
-![Tri-Grams Network Graph](top30trigrams_ken_eng_Notopic_network.png)
-![Bi-Grams Network Graph](top40bigrams_ken_eng_Notopic_network.png)
+## Visualizations: *see file list below for interactive graphs* 
+![Top Tomato Quadgrams](top20quadgrams_ken_tomato_eng.png)
+![Top Cattle Trigrams](top20trigrams_cattle_ken_eng.png)
+![Top Poultry Trigrams](top20trigrams_poultry_ken_eng.png)
+![Top Maize Quadgrams](top20quadgrams_ken_maize_eng.png)
 ![2nd Bi-Grams Network Graph](top40bigrams_ken_eng_network.png)
-![2nd Tri-Grams Network Graph](top40trigrams_ken_eng_network.png)
+![2nd Tri-Grams Network Graph](top30trigrams_ken_eng_network.png)
 
 ## Limitations and Challenges
 
@@ -105,18 +113,19 @@ Bliu_analysis/
 │       └──translate.ipynb
 │   ├── kenya_q_eng.ipynb
 │       └──nlp_eng.ipynb
-│       └──nlp_eng_q_notopic.ipynb
 │       └──nlp_eng_cattle.ipynb
-│       └──nlp_eng_chicken.ipynb
+│       └──nlp_eng_poultry.ipynb
 │       └──nlp_eng_maize.ipynb
 │       └──nlp_eng_tomato.ipynb
 ├── 10 directed interactive network visualizations/
 │   ├── {xx}bigram_eng_ken_{topic}_network.html
-│── static directed network visualizations/
+│── static visualizations/
 │   └── top40trigrams_ken_eng_network.png
 │   └── top40bigrams_ken_eng_network.png
-│   └── top40bigrams_ken_eng_Notopic_network.png
-│   └── top30trigrams_ken_eng_network.png
+│   └── top20quadgrams_ken_tomato_eng.png
+│   └── top20trigrams_cattle_ken_eng.png
+│   └── top20trigrams_poultry_ken_eng.png
+│   └── top20quadgrams_ken_maize_eng.png
 ├── results - displayed in notebooks /
 │   ├── farmers.bliu.pdf - sorry, no markdown file
 └── translated n-grams from swahili to english data/ 
