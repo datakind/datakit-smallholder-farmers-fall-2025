@@ -34,7 +34,7 @@ See *'farmers.bliu.pdf'* for summary of findings
 ### Output Files and Visualizations
 - Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing), which can only be accessed with the link
 - Note:  visualizations are uploaded to github in 'network_graphs' folder
-- N-gram frequency graphs in 'graphs' folder
+- N-gram frequency graphs can be found in 'graphs' folder
 
 
 ### Tools and Technologies
@@ -73,10 +73,10 @@ See *'farmers.bliu.pdf'* for summary of findings
 
 
 ## Visualizations: *see file list below for interactive graphs* 
-![Top Tomato Quadgrams](top30trigrams_ken_eng_Notopic_network.png)
-![Top Cattle Trigrams](top40bigrams_ken_eng_Notopic_network.png)
-![Top Poultry Trigrams](top40bigrams_ken_eng_Notopic_network.png)
-![Top Maize Quadgrams](top40bigrams_ken_eng_Notopic_network.png)
+![Top Tomato Quadgrams](top20quadgrams_ken_tomato_eng.png)
+![Top Cattle Trigrams](top20trigrams_cattle_ken_eng.png)
+![Top Poultry Trigrams](top20trigrams_poultry_ken_eng.png)
+![Top Maize Quadgrams](top20quadgrams_ken_maize_eng.png)
 ![2nd Bi-Grams Network Graph](top40bigrams_ken_eng_network.png)
 ![2nd Tri-Grams Network Graph](top40trigrams_ken_eng_network.png)
 
