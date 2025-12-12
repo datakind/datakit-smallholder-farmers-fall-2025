@@ -1,11 +1,12 @@
 ## Beatrice Liu: Challenge 4 - Crop Questions Analysis 
 
 ## Overview
-Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quadgrams on top 5 topics -  cattle, tomato, maize, poultry, chickens (grouped with poultry).  Identifying the top n-grams could facilitate:
-* Information retrieval:  links to search terms comprised on the most frequent trigrams or quadgrams
+Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quadgrams on top 5 topics -  cattle, tomato, maize, poultry, chickens (grouped with poultry).  
+Identifying the top n-grams could facilitate:
+* Information retrieval:  links to search terms comprised of the most frequent trigrams or quadgrams
 * Content generation:
-       *  Create a FAQ page that covers the most frequent tri- or quadgrams
-       *  Create educational videos on the top question topics with content that covers the top tri- or quadgrams of the questions.  Audio could be in Swahili with English subtitles or vice versa.
+    1. Create a FAQ page that covers the most frequent tri- or quadgrams
+    2. Create educational videos on the top question topics with content that covers the top tri- or quadgrams of the questions.  Audio could be in Swahili with English subtitles or vice versa.
   
 See *'farmers.bliu.pdf'* for summary of findings
 
