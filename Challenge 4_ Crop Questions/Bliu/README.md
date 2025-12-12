@@ -78,7 +78,7 @@ See *'farmers.bliu.pdf'* for summary of findings
 ![Top Poultry Trigrams](top20trigrams_poultry_ken_eng.png)
 ![Top Maize Quadgrams](top20quadgrams_ken_maize_eng.png)
 ![2nd Bi-Grams Network Graph](top40bigrams_ken_eng_network.png)
-![2nd Tri-Grams Network Graph](top40trigrams_ken_eng_network.png)
+![2nd Tri-Grams Network Graph](top30trigrams_ken_eng_network.png)
 
 ## Limitations and Challenges
 
