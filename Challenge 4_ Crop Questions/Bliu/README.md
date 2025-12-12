@@ -4,7 +4,7 @@
 Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quadgrams on top 5 topics -  cattle, tomato, maize, poultry, chickens (grouped with poultry).  
 
 Identifying the top n-grams could facilitate:
-* Information retrieval:  provide links to search terms comprised of the most frequent trigrams or quadgrams
+* Information retrieval:  provide links using search terms comprised of the most frequent trigrams or quadgrams
 * Content generation:
     1. Create a FAQ page that covers the most frequent tri- or quadgrams
     2. Create educational videos on the top question topics with content that covers the top tri- or quadgrams of the questions.  Audio could be in Swahili with English subtitles or vice versa.
@@ -59,7 +59,7 @@ See *'farmers.bliu.pdf'* for summary of findings
 ### Finding: Translating from Swahili is a **major** roadblock
 - Swahili is an under-resourced language in Natural Language Processing
 - Commonly used Python packages such as SpaCy, NLTK, or Gensim do not have inherent Swahili support
-- It is an agglutinative language:  prefixes, roots, and suffixes are combined into one word.  It also has complex noun class structures, that affect verb agreement.  These can lead to ineffective lemmatization.
+- Swahili is an agglutinative language:  prefixes, roots, and suffixes are combined into one word.  It also has complex noun class structures, that affect verb agreement.  These can lead to ineffective lemmatization.
 - Accurate translations require an agricultural corpus on rural farming in Africa, and custom lists of words and lemma dictionary.   
 
 
