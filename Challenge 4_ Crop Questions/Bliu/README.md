@@ -34,7 +34,7 @@ See *'farmers.bliu.pdf'* for summary of findings
 ### Output Files and Visualizations
 - Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing), which can only be accessed with the link
 - Note:  visualizations are uploaded to github in 'network_graphs' folder
-- N-gram frequency graphs can be found in 'graphs' folder
+- N-gram frequency graphs 
 
 
 ### Tools and Technologies
@@ -119,11 +119,13 @@ Bliu_analysis/
 │       └──nlp_eng_tomato.ipynb
 ├── 10 directed interactive network visualizations/
 │   ├── {xx}bigram_eng_ken_{topic}_network.html
-│── static directed network visualizations/
+│── static visualizations/
 │   └── top40trigrams_ken_eng_network.png
 │   └── top40bigrams_ken_eng_network.png
-│   └──
-│   └── top30trigrams_ken_eng_network.png
+│   └── top20quadgrams_ken_tomato_eng.png
+│   └── top20trigrams_cattle_ken_eng.png
+│   └── top20trigrams_poultry_ken_eng.png
+│   └── top20quadgrams_ken_maize_eng.png
 ├── results - displayed in notebooks /
 │   ├── farmers.bliu.pdf - sorry, no markdown file
 └── translated n-grams from swahili to english data/ 
