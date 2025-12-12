@@ -1,8 +1,12 @@
 ## Beatrice Liu: Challenge 4 - Crop Questions Analysis 
 
 ## Overview
-Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quad-grams on top 5 topics -  cattle, tomato, maize, chickens, none -  to identify patterns and relationships and communicate insights concisely. Note:  I can't figure out how to display the interactive graphs here; they are saved in the network_graphs folder.
-
+Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quadgrams on top 5 topics -  cattle, tomato, maize, poultry, chickens (grouped with poultry).  Identifying the top n-grams could facilitate:
+* Information retrieval:  links to search terms comprised on the most frequent trigrams or quadgrams
+* Content generation:
+       *  Create a FAQ page that covers the most frequent tri- or quadgrams
+       *  Create educational videos on the top question topics with content that covers the top tri- or quadgrams of the questions.  Audio could be in Swahili with English subtitles or vice versa.
+  
 See *'farmers.bliu.pdf'* for summary of findings
 
 ## Research Question
@@ -26,7 +30,7 @@ See *'farmers.bliu.pdf'* for summary of findings
 
 
 ### Output Files and Visualizations
-- Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing)
+- Cleaned data files and interactive visualizations can be found in [google drive folder](https://drive.google.com/drive/folders/1tpwqTqoFfZCWvDvncJjaSbzzua0Y6Q_i?usp=sharing), which can only be accessed with the link
 - Note:  visualizations are uploaded to github in 'network_graphs' folder
 - N-gram frequency graphs can be found in individual notebooks *(the PNG files cropped out the n-gram text)*
 
