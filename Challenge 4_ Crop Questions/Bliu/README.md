@@ -72,9 +72,11 @@ See *'farmers.bliu.pdf'* for summary of findings
 - Tomato Kenyan Farmers Asked About Best Time to Plant, Blossom-End Rot, and Best Tomato Varieties
 
 
-## Static Network Visualizations: *see file list below for interactive graphs* 
-![Tri-Grams Network Graph](top30trigrams_ken_eng_Notopic_network.png)
-![Bi-Grams Network Graph](top40bigrams_ken_eng_Notopic_network.png)
+## Visualizations: *see file list below for interactive graphs* 
+![Top Tomato Quadgrams](top30trigrams_ken_eng_Notopic_network.png)
+![Top Cattle Trigrams](top40bigrams_ken_eng_Notopic_network.png)
+![Top Poultry Trigrams](top40bigrams_ken_eng_Notopic_network.png)
+![Top Maize Quadgrams](top40bigrams_ken_eng_Notopic_network.png)
 ![2nd Bi-Grams Network Graph](top40bigrams_ken_eng_network.png)
 ![2nd Tri-Grams Network Graph](top40trigrams_ken_eng_network.png)
 
