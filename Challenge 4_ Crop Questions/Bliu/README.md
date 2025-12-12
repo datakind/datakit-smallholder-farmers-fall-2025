@@ -2,6 +2,7 @@
 
 ## Overview
 Conducted word frequency analysis on questions by **Kenyan Farmers** in the Producers Direct Dataset of WeFarm SMS; created interactive and static visualizations of top bi-, tri-, and quadgrams on top 5 topics -  cattle, tomato, maize, poultry, chickens (grouped with poultry).  
+
 Identifying the top n-grams could facilitate:
 * Information retrieval:  links to search terms comprised of the most frequent trigrams or quadgrams
 * Content generation:
@@ -110,9 +111,8 @@ Bliu_analysis/
 │       └──translate.ipynb
 │   ├── kenya_q_eng.ipynb
 │       └──nlp_eng.ipynb
-│       └──nlp_eng_q_notopic.ipynb
 │       └──nlp_eng_cattle.ipynb
-│       └──nlp_eng_chicken.ipynb
+│       └──nlp_eng_poultry.ipynb
 │       └──nlp_eng_maize.ipynb
 │       └──nlp_eng_tomato.ipynb
 ├── 10 directed interactive network visualizations/
