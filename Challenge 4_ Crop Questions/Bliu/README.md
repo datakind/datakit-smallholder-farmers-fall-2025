@@ -39,13 +39,13 @@ See *'farmers.bliu.pdf'* for summary of findings
 
 ### Tools and Technologies
 - **Programming Language**: Python 3.13.5 
-- **Key Libraries**: pandas, numpy, matplotlib, nltk, deep-language... - full list is in the notebooks
+- **Key Libraries**: pandas, numpy, matplotlib, nltk, deep-language, pyvis... - full list is in the notebooks
 - **GenAI Tools Used**: ChatGPT, Anaconda Toolbox
 - **Other Tools**: Jupyter Notebook
 
 
 ### Tools Used
-- **ChatGPT**: Used for generating code for natural language processing functions in English, translating Swahili tokens into English
+- **ChatGPT**: Used for generating code for natural language processing functions in English and translating Swahili tokens into English
 - **Anaconda Toolbox**: Used for generating interactive network graphs
 
 ### Human Review Process
@@ -65,11 +65,11 @@ See *'farmers.bliu.pdf'* for summary of findings
 
 ### Additional Findings:  *Refer to 'farmers.bliu.pdf'*
 - With These Challenges, Swahili Trigrams Translated in English – All Topics –  Were More Informative Than Bi- or Quadgrams
-- Tri-grams of English Questions Without a Topic Still Focused on Farming:  e.g. Best Practices on Birthing Calves, Planting Maize and Starting a Poultry Farm
-- Cattle Farmers in Kenya Focused on Giving Birth, Milk Production, and Health
-- Chicken Farmers in Kenya Asked About Young Chicks, Laying Eggs, and Medicines
-- Maize Farmers in Kenya Asked About the Best Fertilizer and Weed Control, Best Seeds and Planting
-- Tomato Farmers in Kenya Asked About Planting, Best Seeds, and Keeping Tomatoes Disease-Free
+- Out of 5 Million Trigrams, Farmers Most Frequently Asked About Birthing Calves, Starting Poultry Farms, Using Treatments / Chemicals, and Maize Seeds
+- Cattle Kenyan Farmers Focused on Giving Birth, Milk Production, and Caring for Cows
+- Kenyan Poultry Farmers Asked How to Start a Poultry Farms, Young Chicks, and Lay Eggs
+- Maize Farmers in Kenya Asked About the Best Seeds, Best Fertilizer, Weed and Worm Control
+- Tomato Kenyan Farmers Asked About Best Time to Plant, Blossom-End Rot, and Best Tomato Varieties
 
 
 ## Static Network Visualizations: *see file list below for interactive graphs* 
